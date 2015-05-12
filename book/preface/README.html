@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>序言 | WorkerMan 3.x 手册</title>
+        <title>序言 | GatewayWorker 手册</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.2">
@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="2" data-basepath=".." data-revision="1431446861832">
+    <div class="book"  data-level="2" data-basepath=".." data-revision="1431447746097">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -84,7 +84,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-spinner fa-spin"></i>
-        <a href="../" >WorkerMan 3.x 手册</a>
+        <a href="../" >GatewayWorker 手册</a>
     </h1>
 </div>
 
@@ -574,10 +574,10 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_4831">
+                    <section class="normal" id="section-gitbook_4935">
                     
                         <h1 id="-">序言</h1>
-<p>GatewayWorker基于Workerman开发的一个项目，可用于快速开发长连接应用，例如移动通讯、物联网、游戏服务端、聊天室等等。</p>
+<p>GatewayWorker基于Workerman开发的一个项目，用于快速开发长连接应用，例如移动通讯、物联网、游戏服务端、聊天室等等。</p>
 <h1 id="-">进程模型</h1>
 <p>GatewayWorker分为Gateway进程和Worker进程，Gateway进程维持着客户端的连接并转发连接上发来的数据给Worker进程处理；Worker进程只负责处理转发来的客户端数据，并通过Gateway进程推送数据给任意客户端。</p>
 <p>Gateway只负责网络IO（非阻塞），Worker负责处理业务。</p>

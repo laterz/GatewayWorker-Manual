@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1431446861833
+# Revision 1431447746098
 
 CACHE:
 index.html
@@ -30,9 +30,9 @@ gateway-worker-development/send-to-all.html
 gateway-worker-development/send-to-client.html
 gateway-worker-development/send-to-current-client.html
 gateway-worker-development/server.html
-gateway-worker-development/session.html
 gateway-worker-development/store-config.html
 gateway-worker-development/why-distributed.html
+gateway-worker-development/session.html
 getting-started/README.html
 getting-started/directory.html
 getting-started/feature.html
