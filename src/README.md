@@ -1,6 +1,7 @@
-# WorkerMan 3.x 手册
-本手册只适用于WorkerMan3.x版本
+# GatewayWorker 手册
+本手册只适用于GatewayWorker项目
 
-[Home Page: www.workerman.net](http://www.workerman.net)
+Workerman手册请访问 http://doc3.workerman.net/
+
 
 
