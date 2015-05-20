@@ -9,6 +9,20 @@ GatewayWorker 源码地址
 =======
 https://github.com/walkor/GatewayWorker
 
+Applications\YourApp测试方法
+======
+使用telnet命令测试（不要使用windows再带的telnet测试）
+```shell
+ telnet 127.0.0.1 8282
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+Hello 3
+3 login
+haha
+3 said haha
+```
+
 使用GatewayWorker开发的项目
 =======
 ## [tadpole](http://kedou.workerman.net/)
