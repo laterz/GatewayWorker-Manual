@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1432134610672
+# Revision 1432134861087
 
 CACHE:
 index.html
@@ -17,7 +17,6 @@ gateway-worker-development/event-functions.html
 gateway-worker-development/gateway-worker-development.html
 gateway-worker-development/gateway-worker-separation.html
 gateway-worker-development/gateway.html
-gateway-worker-development/get-online-status.html
 gateway-worker-development/heartbeat.html
 gateway-worker-development/how-distributed.html
 gateway-worker-development/business-worker.html
@@ -33,12 +32,13 @@ gateway-worker-development/server.html
 gateway-worker-development/session.html
 gateway-worker-development/store-config.html
 gateway-worker-development/why-distributed.html
-getting-started/README.html
 getting-started/directory.html
+getting-started/README.html
 getting-started/feature.html
 license/README.html
-preface/README.html
+gateway-worker-development/get-online-status.html
 protocols/README.html
+preface/README.html
 gitbook\app.js
 gitbook\fonts\fontawesome\FontAwesome.otf
 gitbook\fonts\fontawesome\fontawesome-webfont.eot
