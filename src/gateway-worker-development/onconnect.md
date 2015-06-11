@@ -50,7 +50,7 @@ use \GatewayWorker\Lib\Gateway;
 class Event
 {
 
-    public onConnect($client)
+    public static function onConnect($client_id)
     {
        Gateway::sendToCurrentClient('hello');
     }
