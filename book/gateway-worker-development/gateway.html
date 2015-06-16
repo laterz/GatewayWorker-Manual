@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="5.2" data-basepath=".." data-revision="1434033597440">
+    <div class="book"  data-level="5.2" data-basepath=".." data-revision="1434463564678">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -574,7 +574,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_1308">
+                    <section class="normal" id="section-gitbook_19">
                     
                         <h1 id="gateway-">Gateway类的使用</h1>
 <p>文件位置：GatewayWorker/Gateway.php</p>
@@ -597,7 +597,7 @@
 <p>4、lanIp</p>
 <p>lanIp是Gateway所在服务器的内网IP，只有在分布式部署时才需要设置</p>
 <p>5、startPort</p>
-<p>Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提供链接服务，然后Gateway与BusinessWorker之间就通过这个连接通讯。这里设置的是Gateway监听本机端口的起始端口。比如启动了4个Gateway进程，startPort为2000，则每个Gateway进程分别启动的本地端口<strong>一般</strong>为2001、2003、2003、2004。</p>
+<p>Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提供链接服务，然后Gateway与BusinessWorker之间就通过这个连接通讯。这里设置的是Gateway监听本机端口的起始端口。比如启动了4个Gateway进程，startPort为2000，则每个Gateway进程分别启动的本地端口<strong>一般</strong>为2001、2002、2003、2004。</p>
 <p>当本机有多个Gateway/BusinessWorker项目时，需要把每个项目的startPort设置成不同的段</p>
 <p>6、心跳设置，具体说明见心跳一节</p>
 <p>7、onWorkerStart</p>

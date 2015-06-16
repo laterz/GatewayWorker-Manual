@@ -34,7 +34,7 @@ lanIp是Gateway所在服务器的内网IP，只有在分布式部署时才需要
 
 5、startPort
 
-Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提供链接服务，然后Gateway与BusinessWorker之间就通过这个连接通讯。这里设置的是Gateway监听本机端口的起始端口。比如启动了4个Gateway进程，startPort为2000，则每个Gateway进程分别启动的本地端口**一般**为2001、2003、2003、2004。
+Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提供链接服务，然后Gateway与BusinessWorker之间就通过这个连接通讯。这里设置的是Gateway监听本机端口的起始端口。比如启动了4个Gateway进程，startPort为2000，则每个Gateway进程分别启动的本地端口**一般**为2001、2002、2003、2004。
 
 当本机有多个Gateway/BusinessWorker项目时，需要把每个项目的startPort设置成不同的段
 

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1434033597442
+# Revision 1434463564679
 
 CACHE:
 index.html
@@ -16,8 +16,8 @@ gateway-worker-development/distributed.html
 gateway-worker-development/event-functions.html
 gateway-worker-development/gateway-worker-development.html
 gateway-worker-development/gateway-worker-separation.html
-gateway-worker-development/get-online-status.html
 gateway-worker-development/gateway.html
+gateway-worker-development/get-online-status.html
 gateway-worker-development/heartbeat.html
 gateway-worker-development/how-distributed.html
 gateway-worker-development/business-worker.html
