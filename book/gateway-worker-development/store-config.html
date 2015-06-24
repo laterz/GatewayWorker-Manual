@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="5.11" data-basepath=".." data-revision="1434463564678">
+    <div class="book"  data-level="5.11" data-basepath=".." data-revision="1435151751396">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -574,7 +574,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_34">
+                    <section class="normal" id="section-gitbook_58">
                     
                         <h1 id="config-store-">Config/Store 配置</h1>
 <h3 id="-">配置作用</h3>
@@ -622,7 +622,7 @@
 <p>1、线上环境请使用redis存储，即设置</p>
 <pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">$driver</span> = <span class="hljs-keyword">self</span>::DRIVER_REDIS
 </code></pre>
-<p>2、开发者不要使用<code>Store::instance(&#39;gateway&#39;);</code>、<code>Store::instance(&#39;room&#39;);</code>这两个实例，也要避免业务新增配置memcache/redis的ip端口与gateway或者room的配置相同，以免造成业务数据与框架数据冲突。</p>
+<p>2、开发者不要调用<code>Store::instance(&#39;gateway&#39;);</code>、<code>Store::instance(&#39;room&#39;);</code>这两个实例，也要避免业务新增实例配置的memcache/redis ip端口与gateway或者room的配置相同，以免造成业务数据与框架数据冲突。</p>
 <p>3、redis扩展安装方法</p>
 <p>centos系统：yum install php-pecl-redis</p>
 <p>ubuntu/debian系统：apt-get install php5-redis</p>

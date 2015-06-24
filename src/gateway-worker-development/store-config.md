@@ -57,7 +57,7 @@ public static $user= array(
 public static $driver = self::DRIVER_REDIS
 ```
 
-2、开发者不要使用```Store::instance('gateway');```、```Store::instance('room');```这两个实例，也要避免业务新增配置memcache/redis的ip端口与gateway或者room的配置相同，以免造成业务数据与框架数据冲突。
+2、开发者不要调用```Store::instance('gateway');```、```Store::instance('room');```这两个实例，也要避免业务新增实例配置的memcache/redis ip端口与gateway或者room的配置相同，以免造成业务数据与框架数据冲突。
 
 3、redis扩展安装方法
 
