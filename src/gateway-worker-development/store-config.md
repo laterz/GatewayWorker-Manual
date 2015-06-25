@@ -21,11 +21,11 @@ class Store
 
     // 如果是memcache/redis存储，则在这里设置memcache/redis的ip端口，注意确保你安装了memcache/redis扩展
     public static $gateway = array(
-        '127.0.0.1:22301',
+        '127.0.0.1:6379',
     );
 
     public static $room = array(
-        '127.0.0.1:22301',
+        '127.0.0.1:6379',
     );
 
     /* 如果使用文件存储（$driver = self::DRIVER_FILE），则在这里设置数据存储的目录，默认/tmp/下
@@ -43,7 +43,7 @@ class Store
 4、如果是memcache/redis存储，并且业务想添加自己的存储实例，可以开启新的memcache/redis服务端ip端口，然后添加一项配置。例如新增加一个user存储实例，memcache/redis ip端口为192.168.1.2:11211，则只需要增加如下一项到\Config\Store类中
 ```php
 public static $user= array(
-    '127.0.0.1:11211',
+    '127.0.0.1:6380',
 );
 ```
 使用的时候可以这样使用

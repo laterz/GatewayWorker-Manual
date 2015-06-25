@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="5.11" data-basepath=".." data-revision="1435151751396">
+    <div class="book"  data-level="5.11" data-basepath=".." data-revision="1435239523898">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -574,7 +574,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_58">
+                    <section class="normal" id="section-gitbook_146">
                     
                         <h1 id="config-store-">Config/Store 配置</h1>
 <h3 id="-">配置作用</h3>
@@ -595,11 +595,11 @@
 
     <span class="hljs-comment">// 如果是memcache/redis存储，则在这里设置memcache/redis的ip端口，注意确保你安装了memcache/redis扩展</span>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">$gateway</span> = <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'127.0.0.1:22301'</span>,
+        <span class="hljs-string">'127.0.0.1:6379'</span>,
     );
 
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">$room</span> = <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">'127.0.0.1:22301'</span>,
+        <span class="hljs-string">'127.0.0.1:6379'</span>,
     );
 
     <span class="hljs-comment">/* 如果使用文件存储（$driver = self::DRIVER_FILE），则在这里设置数据存储的目录，默认/tmp/下
@@ -612,7 +612,7 @@
 <p>3、如果是memcache/redis存储，请安装memcached/redis服务端及php的memcached/redis扩展。并设定<code>$gateway</code> <code>$room</code>（如果有的话）中的ip和端口为memcache/redis服务端的ip端口。</p>
 <p>4、如果是memcache/redis存储，并且业务想添加自己的存储实例，可以开启新的memcache/redis服务端ip端口，然后添加一项配置。例如新增加一个user存储实例，memcache/redis ip端口为192.168.1.2:11211，则只需要增加如下一项到\Config\Store类中</p>
 <pre><code class="lang-php"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">$user</span>= <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">'127.0.0.1:11211'</span>,
+    <span class="hljs-string">'127.0.0.1:6380'</span>,
 );
 </code></pre>
 <p>使用的时候可以这样使用</p>
