@@ -13,7 +13,7 @@ void Event::onMessage(int $client_id, mixed $recv_data);
 全局唯一的客户端socket连接标识
 
 
-``` $recv_buffer ```
+``` $recv_data ```
 
 完整的客户端请求数据，数据类型取决于Gateway所使用协议的decode方法返的回值类型
 
