@@ -6,23 +6,19 @@
 在WorkerMan中最简单的实现方法是开启多个端口，每个端口使用一种协议。不同客户端使用各自的协议去连特定的端口。
 
 ## 示例（小蝌蚪）
-[小蝌蚪](https://github.com/walkor/workerman-todpole)应用程序是运行在PC浏览器里面的，使用Websocket协议与WorkerMan通讯，当我们需要把它移植到手机App上却有没有合适的客户端Websocket库时，我们可以使用更简单的协议来实现App与WorkerMan通讯，例如Text文本协议(以换行符为结尾的文本数据包)。
+[小蝌蚪](https://github.com/walkor/workerman-todpole)应用程序是运行在PC浏览器里面的，使用Websocket协议与WorkerMan通讯，当我们需要把它移植到手机App上却有没有合适的客户端Websocket库时，我们可以使用更简单的协议来实现App与WorkerMan通讯，例如Text文本协议(协议规则为 文本+换行符)。
 
 下面是开启多端口支持多协议示例
 
-```php
-use \Workerman\WebServer;
-use \GatewayWorker\Gateway;
-use \GatewayWorker\BusinessWorker;
+创建新文件 Applications/Todpole/start_text_gateway.php
 
-// gateway 原有代码
-$gateway = new Gateway("Websocket://0.0.0.0:8282");
-$gateway->name = 'TodpoleGateway';
-$gateway->count = 4;
-$gateway->lanIp = '127.0.0.1';
-$gateway->startPort = 2000;
-$gateway->pingInterval = 10;
-$gateway->pingData = '{"type":"ping"}';
+```php
+use \Workerman\Worker;
+use \GatewayWorker\Gateway;
+
+// 自动加载类
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+Autoloader::setRootPath(__DIR__);
 
 // ##########新增端口支持Text协议 开始##########
 // 新增8283端口，开启Text文本协议
@@ -38,21 +34,17 @@ $gateway_text->startPort = 2500;
 // 也可以设置心跳，这里省略
 // ##########新增端口支持Text协议 结束##########
 
-// bussinessWorker 原有代码
-$worker = new BusinessWorker();
-$worker->name = 'TodpoleBusinessWorker';
-$worker->count = 4;
-
-// WebServer 原有代码
-$web = new WebServer("http://0.0.0.0:8383");
-$web->count = 2;
-$web->addRoot('www.workerman.net', __DIR__.'/Web');
-
+if(!defined('GLOBAL_START'))
+{
+    Worker::runAll();
+}
 ```
+
+重新启动
 
 **测试效果**
 
-由于是文本协议，我们可以通过telnet命令方便的模拟文本协议客户端。以下运行telnet命令的结果
+由于是Text文本协议，我们可以通过telnet命令方便的模拟文本协议客户端。以下运行telnet命令的结果
 
 ```shell
 telnet 127.0.0.1 8283
@@ -64,7 +56,7 @@ Escape character is '^]'.
 {"type":"update","id":156,"angle":5.766,"momentum":0,"x":-64.8,"y":147.1,"life":1,"name":"Guest.156","authorized":false}
 {"type":"update","id":156,"angle":6.284,"momentum":3,"x":-58.8,"y":146.7,"life":1,"name":"Guest.156","authorized":false}
 ```
-我们能看到其它PC客户端通过WorkerMan转发来的蝌蚪的实时坐标数据，我们也可以输入自己的坐标数据，然后按回车键，我们就能在PC客户端上看到自己了。这样通过使用telnet客户端+文本协议，我们可以方便的调试数据，开发新的客户端了。
+我们能看到其它PC客户端通过WorkerMan转发来的蝌蚪的实时坐标数据，我们也可以输入自己的坐标数据，然后按回车键，我们就能在小蝌蚪界面上看到自己了。这样通过使用telnet客户端+文本协议，我们可以方便的调试数据，开发新的客户端了。
 
 
 **说明：**

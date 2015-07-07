@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="6.1" data-basepath=".." data-revision="1435586435075">
+    <div class="book"  data-level="6.1" data-basepath=".." data-revision="1436278751740">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -574,7 +574,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_9">
+                    <section class="normal" id="section-gitbook_552">
                     
                         <h1 id="-workerman-">在非WorkerMan项目中推送消息</h1>
 <h2 id="-">需求</h2>
@@ -608,37 +608,30 @@ Gateway::isOnline(<span class="hljs-variable">$client_id</span>);
 <h2 id="-gateway-">方法三、开启一个内部Gateway端口，用于推送数据</h2>
 <p> 方法二虽然简单，但是局限于只能通过客户端界面操作，定时推送等需求不好直接操作客户端，而通过PHP模拟客户端可能会受到复杂协议的限制不好操作，这时我们可以开启一个内部文本协议的Gateway端口，通过PHP代码使用文本协议连接WorkerMan作为客户端向其它客户端推送数据。</p>
 <p> <strong> 示例（workerman-chat为例） </strong></p>
-<p><strong>服务端：</strong>Applications/Chat/start.php中新增一个文本协议Gateway端口</p>
-<pre><code class="lang-php"><span class="hljs-comment">// gateway</span>
-<span class="hljs-variable">$gateway</span> = <span class="hljs-keyword">new</span> Gateway(<span class="hljs-string">"Websocket://0.0.0.0:7272"</span>);
-<span class="hljs-variable">$gateway</span>-&gt;name = <span class="hljs-string">'ChatGateway'</span>;
-<span class="hljs-variable">$gateway</span>-&gt;count = <span class="hljs-number">4</span>;
-<span class="hljs-variable">$gateway</span>-&gt;lanIp = <span class="hljs-string">'127.0.0.1'</span>;
-<span class="hljs-variable">$gateway</span>-&gt;startPort = <span class="hljs-number">2500</span>;
-<span class="hljs-variable">$gateway</span>-&gt;pingInterval = <span class="hljs-number">10</span>;
-<span class="hljs-variable">$gateway</span>-&gt;pingData = <span class="hljs-string">'{"type":"ping"}'</span>;
+<p><strong>服务端：</strong>新建文件Applications/Chat/start_text_gateway.php，用于增加一个文本协议Gateway端口，内容如下</p>
+<pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">Worker</span>;
+<span class="hljs-keyword">use</span> \<span class="hljs-title">GatewayWorker</span>\<span class="hljs-title">Gateway</span>;
+<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">Autoloader</span>;
+<span class="hljs-keyword">require_once</span> <span class="hljs-keyword">__DIR__</span> . <span class="hljs-string">'/../../Workerman/Autoloader.php'</span>;
+Autoloader::setRootPath(<span class="hljs-keyword">__DIR__</span>);
 
-<span class="hljs-comment">// #### 内部推送端口(假设内网ip为192.168.100.100) ####</span>
+<span class="hljs-comment">// #### 内部推送端口(假设当前服务器内网ip为192.168.100.100) ####</span>
 <span class="hljs-variable">$internal_gateway</span> = <span class="hljs-keyword">new</span> Gateway(<span class="hljs-string">"Text://192.168.100.100:7273"</span>);
 <span class="hljs-variable">$internal_gateway</span>-&gt;name=<span class="hljs-string">'internalGateway'</span>;
 <span class="hljs-variable">$internal_gateway</span>-&gt;startPort = <span class="hljs-number">2800</span>;
 <span class="hljs-comment">// #### 内部推送端口设置完毕 ####</span>
 
-<span class="hljs-comment">// bussinessWorker</span>
-<span class="hljs-variable">$worker</span> = <span class="hljs-keyword">new</span> BusinessWorker();
-<span class="hljs-variable">$worker</span>-&gt;name = <span class="hljs-string">'ChatBusinessWorker'</span>;
-<span class="hljs-variable">$worker</span>-&gt;count = <span class="hljs-number">4</span>;
-
-<span class="hljs-comment">// WebServer</span>
-<span class="hljs-variable">$web</span> = <span class="hljs-keyword">new</span> WebServer(<span class="hljs-string">"http://0.0.0.0:55151"</span>);
-<span class="hljs-variable">$web</span>-&gt;count = <span class="hljs-number">2</span>;
-<span class="hljs-variable">$web</span>-&gt;addRoot(<span class="hljs-string">'www.workerman.net'</span>, <span class="hljs-keyword">__DIR__</span>.<span class="hljs-string">'/Web'</span>);
+<span class="hljs-keyword">if</span>(!defined(<span class="hljs-string">'GLOBAL_START'</span>))
+{
+    Worker::runAll();
+}
 </code></pre>
 <p> <strong>客户端：</strong>在其它项目中就可以直接用PHP socket 使用文本协议调用，代码类似如下:</p>
 <pre><code class="lang-php"><span class="hljs-comment">// 建立连接，@see http://php.net/manual/zh/function.stream-socket-client.php</span>
 <span class="hljs-variable">$client</span> = stream_socket_client(<span class="hljs-string">'tcp://192.168.100.100:7273'</span>);
 <span class="hljs-keyword">if</span>(!<span class="hljs-variable">$client</span>)<span class="hljs-keyword">exit</span>(<span class="hljs-string">"can not connect"</span>);
-<span class="hljs-comment">// 模拟超级用户，以文本协议发送数据，注意文本协议末尾有换行符（发送的数据中最好有能识别超级用户的字段），这样在Event.php中的onMessage方法中便能收到这个数据，然后做相应的处理</span>
+<span class="hljs-comment">// 模拟超级用户，以文本协议发送数据，注意Text文本协议末尾有换行符（发送的数据中最好有能识别超级用户的字段），这样在Event.php中的onMessage方法中便能收到这个数据，然后做相应的处理即可</span>
 fwrite(<span class="hljs-variable">$client</span>, <span class="hljs-string">'{"type":"send","content":"hello all", "user":"admin", "pass":"******"}'</span>.<span class="hljs-string">"\n"</span>);
 </code></pre>
 

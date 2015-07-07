@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="5.10.3" data-basepath=".." data-revision="1435586435075">
+    <div class="book"  data-level="5.10.3" data-basepath=".." data-revision="1436278751740">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -574,7 +574,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_19">
+                    <section class="normal" id="section-gitbook_562">
                     
                         <h1 id="gateway-worker-">gateway worker 分离部署</h1>
 <h2 id="-gateway-worker-">什么是Gateway Worker分离部署</h2>
@@ -583,8 +583,8 @@
 <p>以Applications/Todpole为例，假如需要部署三台服务器提供高可用服务。瓶颈在worker进程，则可使用1台作为gateway服务器，另外两台做worker服务器。（如果瓶颈在gateway进程（一般是带宽瓶颈），则可以2台gateway机器，1台worker机器，部署方法类似）。</p>
 <h2 id="gateway-worker-">gateway worker 分离部署扩容步骤</h2>
 <p>1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）</p>
-<p>2、由于192.168.0.1这台机器只部署Gateway进程，所以将该ip上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如</p>
-<p>打开文件Applications/Todpole/start.php，注释掉bussinessWorker初始化</p>
+<p>2、由于192.168.0.1这台机器只部署Gateway进程，所以将该服务器上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如</p>
+<p>这里打开文件Applications/Todpole/start_businessworker.php，注释掉bussinessWorker初始化</p>
 <pre><code class="lang-php">...
 <span class="hljs-comment">// bussinessWorker</span>
 <span class="hljs-comment">//$worker = new BusinessWorker();</span>
@@ -592,39 +592,29 @@
 <span class="hljs-comment">//$worker-&gt;count = 4;</span>
 ...
 </code></pre>
-<p>3、配置Gateway服务器(192.168.0.1)上的Gateway实例的<code>lanIp=192.168.0.1</code>与本机ip一致，Gateway服务器的初始化文件最终类似下面配置(如果有单独的Web服务器运行蝌蚪界面，可以把WebServer初始化部分也去掉)</p>
-<p>文件Applications/Todpole/start.php</p>
+<p>3、配置Gateway服务器(192.168.0.1)上的Gateway实例的<code>lanIp=192.168.0.1</code>与本机ip一致，Gateway服务器的初始化文件最终类似下面配置</p>
+<p>文件Applications/Todpole/start_gateway.php</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">WebServer</span>;
+<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">Worker</span>;
 <span class="hljs-keyword">use</span> \<span class="hljs-title">GatewayWorker</span>\<span class="hljs-title">Gateway</span>;
-<span class="hljs-keyword">use</span> \<span class="hljs-title">GatewayWorker</span>\<span class="hljs-title">BusinessWorker</span>;
 
 <span class="hljs-comment">// gateway</span>
 <span class="hljs-variable">$gateway</span> = <span class="hljs-keyword">new</span> Gateway(<span class="hljs-string">"Websocket://0.0.0.0:8282"</span>);
 <span class="hljs-variable">$gateway</span>-&gt;name = <span class="hljs-string">'TodpoleGateway'</span>;
 <span class="hljs-variable">$gateway</span>-&gt;count = <span class="hljs-number">4</span>;
+<span class="hljs-comment">// ==== 注意这里配置的是本机内网ip ====</span>
 <span class="hljs-variable">$gateway</span>-&gt;lanIp = <span class="hljs-string">'192.168.0.1'</span>;
 <span class="hljs-variable">$gateway</span>-&gt;startPort = <span class="hljs-number">2000</span>;
 <span class="hljs-variable">$gateway</span>-&gt;pingInterval = <span class="hljs-number">10</span>;
 <span class="hljs-variable">$gateway</span>-&gt;pingData = <span class="hljs-string">'{"type":"ping"}'</span>;
 
-<span class="hljs-comment">// bussinessWorker</span>
-<span class="hljs-comment">//$worker = new BusinessWorker();</span>
-<span class="hljs-comment">//$worker-&gt;name = 'TodpoleBusinessWorker';</span>
-<span class="hljs-comment">//$worker-&gt;count = 4;</span>
-
-<span class="hljs-comment">// WebServer</span>
-<span class="hljs-variable">$web</span> = <span class="hljs-keyword">new</span> WebServer(<span class="hljs-string">"http://0.0.0.0:8383"</span>);
-<span class="hljs-variable">$web</span>-&gt;count = <span class="hljs-number">12</span>;
-<span class="hljs-variable">$web</span>-&gt;addRoot(<span class="hljs-string">'kedou.workerman.net'</span>, <span class="hljs-keyword">__DIR__</span>.<span class="hljs-string">'/Web'</span>);
-
 ...
 </code></pre>
-<p>3、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台ip上的Gateway初始化注释掉或者删掉，避免运行Gateway进程，BusinessWorker服务器初始化文件类似下面(如果有单独的Web服务器运行蝌蚪界面，可以把WebServer初始化部分也去掉)</p>
+<p>3、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台服务器上的Gateway进程初始化文件注释掉或者删掉。</p>
+<p>这里打开Applications/Todpole/start_gateway.php，注释掉gateway初始化部分</p>
 <pre><code class="lang-php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">WebServer</span>;
+<span class="hljs-keyword">use</span> \<span class="hljs-title">Workerman</span>\<span class="hljs-title">Worker</span>;
 <span class="hljs-keyword">use</span> \<span class="hljs-title">GatewayWorker</span>\<span class="hljs-title">Gateway</span>;
-<span class="hljs-keyword">use</span> \<span class="hljs-title">GatewayWorker</span>\<span class="hljs-title">BusinessWorker</span>;
 
 <span class="hljs-comment">// gateway</span>
 <span class="hljs-comment">//$gateway = new Gateway("Websocket://0.0.0.0:8282");</span>
@@ -634,20 +624,10 @@
 <span class="hljs-comment">//$gateway-&gt;startPort = 2000;</span>
 <span class="hljs-comment">//$gateway-&gt;pingInterval = 10;</span>
 <span class="hljs-comment">//$gateway-&gt;pingData = '{"type":"ping"}';</span>
-
-<span class="hljs-comment">// bussinessWorker</span>
-<span class="hljs-variable">$worker</span> = <span class="hljs-keyword">new</span> BusinessWorker();
-<span class="hljs-variable">$worker</span>-&gt;name = <span class="hljs-string">'TodpoleBusinessWorker'</span>;
-<span class="hljs-variable">$worker</span>-&gt;count = <span class="hljs-number">4</span>;
-
-<span class="hljs-comment">// WebServer</span>
-<span class="hljs-variable">$web</span> = <span class="hljs-keyword">new</span> WebServer(<span class="hljs-string">"http://0.0.0.0:8383"</span>);
-<span class="hljs-variable">$web</span>-&gt;count = <span class="hljs-number">12</span>;
-<span class="hljs-variable">$web</span>-&gt;addRoot(<span class="hljs-string">'kedou.workerman.net'</span>, <span class="hljs-keyword">__DIR__</span>.<span class="hljs-string">'/Web'</span>);
 </code></pre>
-<p>4、由于物理机之间需要共享一些数据，需要部署一台redis服务器，假设部署在Gateway（192.168.0.1）这台机器上，redis服务端口为6379</p>
-<p>5、给三台服务器的PHP添加redisd或者redis扩展。推荐用redisd扩展，ubuntu/debian可使用 <code>sudo apt-get install php5-redis</code>安装；centos系统使用<code>yum install php-pecl-redis</code> 安装。</p>
-<p>6、配置redis，更改三台服务器上<code>Applications/Todpole/Config/Store.php</code>中的<code>driver</code>、<code>gateway</code>两项配置如下，</p>
+<p>4、由于物理机之间需要共享一些数据，需要部署一台redis服务器，假设部署在Gateway（192.168.0.1）这台机器上，redis服务端口为6379。注意需要将redis服务端（redis-server）配置中timeout设置为0。</p>
+<p>5、给三台服务器的PHP添加redis扩展。运行<code>pecl install redis</code> 安装redis扩展。</p>
+<p>6、配置redis，更改三台服务器上<code>Applications/Todpole/Config/Store.php</code>中的<code>driver</code>、<code>gateway</code>两项配置如下，（如果是聊天室，则也要配置<code>room</code>的redis ip和端口）</p>
 <pre><code class="lang-php"><span class="hljs-comment">// 存储驱动改为redis</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">$driver</span> = <span class="hljs-keyword">self</span>::DRIVER_REDIS
 <span class="hljs-comment">// 更改redis ip和端口</span>

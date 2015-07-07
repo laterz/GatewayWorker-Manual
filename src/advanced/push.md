@@ -47,34 +47,26 @@ Gateway::isOnline($client_id);
 
  ** 示例（workerman-chat为例） **
 
-**服务端：**Applications/Chat/start.php中新增一个文本协议Gateway端口
+**服务端：**新建文件Applications/Chat/start_text_gateway.php，用于增加一个文本协议Gateway端口，内容如下
 
  ```php
-// gateway
-$gateway = new Gateway("Websocket://0.0.0.0:7272");
-$gateway->name = 'ChatGateway';
-$gateway->count = 4;
-$gateway->lanIp = '127.0.0.1';
-$gateway->startPort = 2500;
-$gateway->pingInterval = 10;
-$gateway->pingData = '{"type":"ping"}';
+<?php
+use \Workerman\Worker;
+use \GatewayWorker\Gateway;
+use \Workerman\Autoloader;
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+Autoloader::setRootPath(__DIR__);
 
-// #### 内部推送端口(假设内网ip为192.168.100.100) ####
+// #### 内部推送端口(假设当前服务器内网ip为192.168.100.100) ####
 $internal_gateway = new Gateway("Text://192.168.100.100:7273");
 $internal_gateway->name='internalGateway';
 $internal_gateway->startPort = 2800;
 // #### 内部推送端口设置完毕 ####
 
-// bussinessWorker
-$worker = new BusinessWorker();
-$worker->name = 'ChatBusinessWorker';
-$worker->count = 4;
-
-// WebServer
-$web = new WebServer("http://0.0.0.0:55151");
-$web->count = 2;
-$web->addRoot('www.workerman.net', __DIR__.'/Web');
-
+if(!defined('GLOBAL_START'))
+{
+    Worker::runAll();
+}
  ```
 
  **客户端：**在其它项目中就可以直接用PHP socket 使用文本协议调用，代码类似如下:
@@ -82,7 +74,7 @@ $web->addRoot('www.workerman.net', __DIR__.'/Web');
 // 建立连接，@see http://php.net/manual/zh/function.stream-socket-client.php
 $client = stream_socket_client('tcp://192.168.100.100:7273');
 if(!$client)exit("can not connect");
-// 模拟超级用户，以文本协议发送数据，注意文本协议末尾有换行符（发送的数据中最好有能识别超级用户的字段），这样在Event.php中的onMessage方法中便能收到这个数据，然后做相应的处理
+// 模拟超级用户，以文本协议发送数据，注意Text文本协议末尾有换行符（发送的数据中最好有能识别超级用户的字段），这样在Event.php中的onMessage方法中便能收到这个数据，然后做相应的处理即可
 fwrite($client, '{"type":"send","content":"hello all", "user":"admin", "pass":"******"}'."\n");
  ```
 

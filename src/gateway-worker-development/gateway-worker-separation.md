@@ -11,9 +11,9 @@ Gateway/Worker模式有两组进程，Gateway进程负责网络IO，Worker进程
 ## gateway worker 分离部署扩容步骤
 1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）
 
-2、由于192.168.0.1这台机器只部署Gateway进程，所以将该ip上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如
+2、由于192.168.0.1这台机器只部署Gateway进程，所以将该服务器上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如
 
-打开文件Applications/Todpole/start.php，注释掉bussinessWorker初始化
+这里打开文件Applications/Todpole/start_businessworker.php，注释掉bussinessWorker初始化
 
 ```php
 ...
@@ -24,44 +24,35 @@ Gateway/Worker模式有两组进程，Gateway进程负责网络IO，Worker进程
 ...
 ```
 
-3、配置Gateway服务器(192.168.0.1)上的Gateway实例的```lanIp=192.168.0.1```与本机ip一致，Gateway服务器的初始化文件最终类似下面配置(如果有单独的Web服务器运行蝌蚪界面，可以把WebServer初始化部分也去掉)
+3、配置Gateway服务器(192.168.0.1)上的Gateway实例的```lanIp=192.168.0.1```与本机ip一致，Gateway服务器的初始化文件最终类似下面配置
 
-文件Applications/Todpole/start.php
+文件Applications/Todpole/start_gateway.php
 ```php
 <?php
-use \Workerman\WebServer;
+use \Workerman\Worker;
 use \GatewayWorker\Gateway;
-use \GatewayWorker\BusinessWorker;
 
 // gateway
 $gateway = new Gateway("Websocket://0.0.0.0:8282");
 $gateway->name = 'TodpoleGateway';
 $gateway->count = 4;
+// ==== 注意这里配置的是本机内网ip ====
 $gateway->lanIp = '192.168.0.1';
 $gateway->startPort = 2000;
 $gateway->pingInterval = 10;
 $gateway->pingData = '{"type":"ping"}';
 
-// bussinessWorker
-//$worker = new BusinessWorker();
-//$worker->name = 'TodpoleBusinessWorker';
-//$worker->count = 4;
-
-// WebServer
-$web = new WebServer("http://0.0.0.0:8383");
-$web->count = 12;
-$web->addRoot('kedou.workerman.net', __DIR__.'/Web');
-
 ...
 ```
 
-3、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台ip上的Gateway初始化注释掉或者删掉，避免运行Gateway进程，BusinessWorker服务器初始化文件类似下面(如果有单独的Web服务器运行蝌蚪界面，可以把WebServer初始化部分也去掉)
+3、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台服务器上的Gateway进程初始化文件注释掉或者删掉。
+
+这里打开Applications/Todpole/start_gateway.php，注释掉gateway初始化部分
 
 ```php
 <?php
-use \Workerman\WebServer;
+use \Workerman\Worker;
 use \GatewayWorker\Gateway;
-use \GatewayWorker\BusinessWorker;
 
 // gateway
 //$gateway = new Gateway("Websocket://0.0.0.0:8282");
@@ -72,22 +63,13 @@ use \GatewayWorker\BusinessWorker;
 //$gateway->pingInterval = 10;
 //$gateway->pingData = '{"type":"ping"}';
 
-// bussinessWorker
-$worker = new BusinessWorker();
-$worker->name = 'TodpoleBusinessWorker';
-$worker->count = 4;
-
-// WebServer
-$web = new WebServer("http://0.0.0.0:8383");
-$web->count = 12;
-$web->addRoot('kedou.workerman.net', __DIR__.'/Web');
 ```
 
-4、由于物理机之间需要共享一些数据，需要部署一台redis服务器，假设部署在Gateway（192.168.0.1）这台机器上，redis服务端口为6379
+4、由于物理机之间需要共享一些数据，需要部署一台redis服务器，假设部署在Gateway（192.168.0.1）这台机器上，redis服务端口为6379。注意需要将redis服务端（redis-server）配置中timeout设置为0。
 
-5、给三台服务器的PHP添加redisd或者redis扩展。推荐用redisd扩展，ubuntu/debian可使用 ```sudo apt-get install php5-redis```安装；centos系统使用```yum install php-pecl-redis``` 安装。
+5、给三台服务器的PHP添加redis扩展。运行```pecl install redis``` 安装redis扩展。
 
-6、配置redis，更改三台服务器上```Applications/Todpole/Config/Store.php```中的```driver```、```gateway```两项配置如下，
+6、配置redis，更改三台服务器上```Applications/Todpole/Config/Store.php```中的```driver```、```gateway```两项配置如下，（如果是聊天室，则也要配置```room```的redis ip和端口）
 
 ```php
 // 存储驱动改为redis
