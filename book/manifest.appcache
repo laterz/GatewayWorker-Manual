@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1436971627374
+# Revision 1437892261812
 
 CACHE:
 index.html
@@ -10,6 +10,7 @@ appendices/README.html
 appendices/mysql.html
 gateway-worker-development/is-online.html
 gateway-worker-development/README.html
+gateway-worker-development/business-worker.html
 gateway-worker-development/close-client.html
 gateway-worker-development/close-current-client.html
 gateway-worker-development/distributed.html
@@ -20,7 +21,7 @@ gateway-worker-development/gateway.html
 gateway-worker-development/get-online-status.html
 gateway-worker-development/heartbeat.html
 gateway-worker-development/how-distributed.html
-gateway-worker-development/business-worker.html
+gateway-worker-development/bind-uid.html
 gateway-worker-development/lib-gateway-functions.html
 gateway-worker-development/onclose.html
 gateway-worker-development/onconnect.html
@@ -29,6 +30,7 @@ gateway-worker-development/router.html
 gateway-worker-development/send-to-all.html
 gateway-worker-development/send-to-client.html
 gateway-worker-development/send-to-current-client.html
+gateway-worker-development/send-to-uid.html
 gateway-worker-development/server.html
 gateway-worker-development/session.html
 gateway-worker-development/store-config.html

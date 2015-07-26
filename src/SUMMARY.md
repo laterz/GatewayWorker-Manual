@@ -22,6 +22,8 @@
        * [closeCurrentClient](gateway-worker-development/close-current-client.md)
        * [isOnline](gateway-worker-development/is-online.md)
        * [getOnlineStatus](gateway-worker-development/get-online-status.md)
+       * [bindUid](gateway-worker-development/bind-uid.md)
+       * [sendToUid](gateway-worker-development/send-to-uid.md)
    * [设置路由router](gateway-worker-development/router.md)
    * [超全局数组$_SESSION](gateway-worker-development/session.md)
    * [超全局数组$_SERVER](gateway-worker-development/server.md)
