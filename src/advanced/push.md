@@ -10,7 +10,7 @@ https://github.com/walkor/GatewayClient
 
 **使用方法：**
 
-**注意：**如果项目与WorkerMan不在同一台服务器，需要安装redis，参考8.10 Config/Store配置章节。
+**注意：**如果项目与WorkerMan不在同一台服务器，需要安装redis，参考5.11 Config/Store配置章节。
 
 **注意：**如果项目与WorkerMan在同一台服务器，并且Config/Store.php中```$driver = self::DRIVER_FILE;```，需要将```Store::$storePath = sys_get_temp_dir().'/workerman-your-app/';```一行代码中```sys_get_temp_dir()```改成固定值，因为这个函数的返回值在两个项目可能不一致。
 
