@@ -24,7 +24,7 @@ GatewayClient/
 │   └── Store.php
 └── Gateway.php
 ```
-2、引入GatewayClient/Gateway.php文件开始使用。接口使用方法与\GatewayWorker\Lib\Gateway接口相同，接口说明参见8.5章节。
+2、引入GatewayClient/Gateway.php文件开始使用。接口使用方法与\GatewayWorker\Lib\Gateway接口相同，接口说明参见5.5章节。
 
  **客户端使用示例**
  ```php
