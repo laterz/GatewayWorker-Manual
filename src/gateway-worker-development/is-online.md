@@ -33,7 +33,7 @@ class Event
         if($req_data['type'] == 'say_to_one'))
         {
             // 如果不在线就先存起来
-            if(!Gateway::isOnline($req_data['to_client_id'])
+            if(!Gateway::isOnline($req_data['to_client_id']))
             {
                 your_store_fun($message);
             }

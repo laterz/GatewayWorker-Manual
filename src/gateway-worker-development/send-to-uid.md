@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Gateway::sendToUid(mixed $uid, mixed $message);
+void Gateway::sendToUid(mixed $uid, string $message);
 ```
 
 向uid绑定的所有client_id发送数据。
@@ -13,11 +13,11 @@ void Gateway::sendToUid(mixed $uid, mixed $message);
 
 * ```$uid```
 
-uid
+uid，uid可以是字符串、数字、或者包含uid的数组。如果uid为数组，则是给数组内所有uid发送数据
 
 * ```$message```
 
-要发送的数据，此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
+要发送的数据（字符串类型），此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
 
 ## 范例
 ```php

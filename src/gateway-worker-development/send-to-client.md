@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Gateway::sendToClient(int $client_id, mixed $send_data);
+void Gateway::sendToClient(int $client_id, string $send_data);
 ```
 
 向客户端client_id发送```$send_data```数据。如果client_id对应的客户端不存在或者不在线则自动丢弃发送数据
@@ -15,7 +15,7 @@ void Gateway::sendToClient(int $client_id, mixed $send_data);
 
 * ```$send_data```
 
-要发送的数据，此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
+要发送的数据（字符串类型），此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
 
 ## 范例
 ```php

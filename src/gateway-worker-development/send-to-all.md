@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Gateway::sendToAll(mixed $send_data [, array $client_id_array=array()]);
+void Gateway::sendToAll(string $send_data [, array $client_id_array=array()]);
 ```
 
 向所有客户端或者client_id_array指定的客户端发送```$send_data```数据。如果指定的$client_id_array中的client_id不存在则自动丢弃
@@ -12,7 +12,7 @@ void Gateway::sendToAll(mixed $send_data [, array $client_id_array=array()]);
 
 * ```$send_data```
 
-要发送的数据，此数据会被Gateway所使用协议的encode方法打包后发送给客户端
+要发送的数据（字符串类型），此数据会被Gateway所使用协议的encode方法打包后发送给客户端
 
 
 * ```$client_id_array```
