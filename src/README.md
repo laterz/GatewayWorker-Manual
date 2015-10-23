@@ -16,6 +16,16 @@ https://github.com/walkor/GatewayWorker
 
 Applications\YourApp测试方法
 ======
+##启动
+以debug方式启动
+
+```php start.php start```
+
+或者以daemon方式启动
+
+```php start.php start -d```
+
+## 测试
 使用telnet命令测试（不要使用windows再带的telnet测试）
 ```shell
  telnet 127.0.0.1 8282
