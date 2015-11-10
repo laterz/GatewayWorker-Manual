@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Gateway::sendToClient(int $client_id, string $send_data);
+void Gateway::sendToClient(string $client_id, string $send_data);
 ```
 
 向客户端client_id发送```$send_data```数据。如果client_id对应的客户端不存在或者不在线则自动丢弃发送数据
@@ -11,7 +11,7 @@ void Gateway::sendToClient(int $client_id, string $send_data);
 
 * ```$client_id```
 
-客户端的client_id，当客户端连接Gateway的那一刻框架便为其分配了一个全局唯一的client_id用来全局标识一个客户端连接。对某个客户端的操作都需要知道客户端的client_id
+客户端连接的client_id
 
 * ```$send_data```
 
