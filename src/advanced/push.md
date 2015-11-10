@@ -3,7 +3,7 @@
 ## 需求
 有时候需要在非GatewayWorker环境中向客户端推送数据。例如在一个普通的Web项目中通过GatewayWorker推送数据（前提是已经部署了GatewayWorker，客户端已经连接GatewayWorker）。目前有三种比较方便方法推送数据。
 
-## 方法一、使用GatewayClient客户端推送
+## 方法一、使用GatewayClient客户端推送，提供的接口与GatewayWorker中的接口一致
 **客户端地址：**
 
 https://github.com/walkor/GatewayClient
