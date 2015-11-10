@@ -1,8 +1,9 @@
 # 目录结构
 <pre>
 GatewayWorker            // Gateway/Worker模型公共类库
-   ├── BusinessWorker.php   // Worker业务进程
-   ├── Gateway.php          // Gateway进程
+   ├── BusinessWorker.php   // Worker服务业务进程文件
+   ├── Gateway.php          // Gateway服务进程文件
+   ├── Register.php         // 服务注册进程文件
    └── Lib                  // 类库
        ├── Context.php      // Gateway与Worker通讯的上下文
        ├── DbConnection.php // 数据库连接类
