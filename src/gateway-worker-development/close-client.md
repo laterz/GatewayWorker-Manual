@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Gateway::closeClient(int $client_id);
+void Gateway::closeClient(string $client_id);
 ```
 
 断开与client_id对应的客户端的连接
