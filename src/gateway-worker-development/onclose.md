@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Event::onClose(int $client_id);
+void Event::onClose(string $client_id);
 ```
 
 客户端与Gateway的连接断开时触发。不管是客户端主动断开还是服务端主动closeClient，都会触发这个回调。一般在这里做一些数据清理工作。
