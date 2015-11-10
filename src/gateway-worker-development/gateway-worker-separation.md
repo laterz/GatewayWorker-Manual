@@ -9,7 +9,7 @@ Gateway/Worker模式有两组进程，Gateway进程负责网络IO，Worker进程
 
 
 ## gateway worker 分离部署扩容步骤
-1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）
+1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）。另外集群统一使用192.168.0.1上的注册服务，以Gateway和BusinessWorker建立起连接。
 
 2、由于192.168.0.1这台机器只部署Gateway进程，所以将该服务器上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如
 
@@ -24,7 +24,7 @@ Gateway/Worker模式有两组进程，Gateway进程负责网络IO，Worker进程
 ...
 ```
 
-3、配置Gateway服务器(192.168.0.1)上的Gateway实例的```lanIp=192.168.0.1```与本机ip一致，Gateway服务器的初始化文件最终类似下面配置
+3、配置Gateway服务器(192.168.0.1)上的Gateway实例的```lanIp=192.168.0.1```与本机ip一致，配置registerAddress为'192.168.0.1:1236',Gateway服务器的初始化文件最终类似下面配置
 
 文件Applications/Todpole/start_gateway.php
 ```php
@@ -38,6 +38,8 @@ $gateway->name = 'TodpoleGateway';
 $gateway->count = 4;
 // ==== 注意这里配置的是本机内网ip ====
 $gateway->lanIp = '192.168.0.1';
+// ==== 注意这里配置的是192.168.0.1:1236 ====
+$gateway->registerAddress = '192.168.0.1:1236';
 $gateway->startPort = 2000;
 $gateway->pingInterval = 10;
 $gateway->pingData = '{"type":"ping"}';
@@ -59,29 +61,16 @@ use \GatewayWorker\Gateway;
 //$gateway->name = 'TodpoleGateway';
 //$gateway->count = 4;
 //$gateway->lanIp = '192.168.0.1';
+//$gateway->registerAddress = '192.168.0.1:1236';
 //$gateway->startPort = 2000;
 //$gateway->pingInterval = 10;
 //$gateway->pingData = '{"type":"ping"}';
 
 ```
 
-4、由于物理机之间需要共享一些数据，需要部署一台redis服务器，假设部署在Gateway（192.168.0.1）这台机器上，redis服务端口为6379。注意需要将redis服务端（redis-server）配置中timeout设置为0。
+4、打开192.168.0.2/3两台服务器的start_businessworker.php，配置registerAddress为 192.168.0.1:1236
 
-5、给三台服务器的PHP添加redis扩展。运行```pecl install redis``` 安装redis扩展。
-
-6、配置redis，更改三台服务器上```Applications/Todpole/Config/Store.php```中的```driver```、```gateway```两项配置如下，（如果是聊天室，则也要配置```room```的redis ip和端口）
-
-```php
-// 存储驱动改为redis
-public static $driver = self::DRIVER_REDIS
-// 更改redis ip和端口
-public static $gateway = array(
-     '192.168.0.1:6379',
-);
-
-```
-
-7、首先启动Gateway服务器192.168.0.1，然后启动BusinessWorker的服务器192.168.0.2/3
+5、逐台启动
 
 *至此，WorkerMan分布式部署完毕。*
 
