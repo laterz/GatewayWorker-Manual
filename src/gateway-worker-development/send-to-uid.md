@@ -7,13 +7,13 @@ void Gateway::sendToUid(mixed $uid, string $message);
 
 向uid绑定的所有client_id发送数据。
 
-注意：uid与client_id是一对多的关系，如果当前uid下绑定了多个client_id，则多个client_id对应的客户端都会收到消息。
+注意：默认uid与client_id是一对多的关系，如果当前uid下绑定了多个client_id，则多个client_id对应的客户端都会收到消息，这类似于PC QQ和手机QQ同时在线接收消息。
 
 ## 参数
 
 * ```$uid```
 
-uid，uid可以是字符串、数字、或者包含uid的数组。如果uid为数组，则是给数组内所有uid发送数据
+uid可以是字符串、数字、或者包含uid的数组。如果uid为数组，则是给数组内所有uid发送数据
 
 * ```$message```
 
