@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Event::onMessage(int $client_id, mixed $recv_data);
+void Event::onMessage(string $client_id, mixed $recv_data);
 ```
 
 当收到一个客户端请求后触发
