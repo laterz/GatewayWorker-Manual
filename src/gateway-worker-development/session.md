@@ -1,6 +1,6 @@
 # 超全局数组```$_SESSION```
 ### ```$_SESSION```是什么
-WorkerMan中的超全局数组```$_SESSION```和PHP自身的```$_SESSION```功能基本相同。每个client_id对应一个```$_SESSION```数组，```$_SESSION```数组中可以保存对应客户端的会话数据，对应的client_id的后续请求可以直接使用这个数组中的数据，而不用去反复读取存储。
+GatewayWorker中的超全局数组```$_SESSION```和PHP自身的```$_SESSION```功能基本相同。每个client_id对应一个```$_SESSION```数组，```$_SESSION```数组中可以保存对应客户端的会话数据，对应的client_id的后续请求可以直接使用这个数组中的数据，而不用去反复读取存储。
 
 ### ```$_SESSION```使用场景
 **(```WorkerMan>=2.1.2，Gateway/Worker模型```)**
@@ -11,6 +11,7 @@ WorkerMan中的超全局数组```$_SESSION```和PHP自身的```$_SESSION```功�
 * 使用```$_SESSION```时无需调用session_start等函数，可直接使用
 * ```$_SESSION```中无法保存资源类型的数据
 * 当客户端连接断开后，对应的客户端```$_SESSION```将会清除
+* GatewayWorker中的```$_SESSION```与WebServer(PHP-FPM)中的```$_SESSION```无法互通
 
 ### ```$_SESSION```实现原理
 
