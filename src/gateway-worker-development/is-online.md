@@ -35,6 +35,7 @@ class Event
             // 如果不在线就先存起来
             if(!Gateway::isOnline($req_data['to_client_id']))
             {
+                // 假设your_store_fun是用来保存未读消息的函数
                 your_store_fun($message);
             }
             else
