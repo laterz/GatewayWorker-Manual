@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-int Gateway::isOnline(int $client_id);
+int Gateway::isOnline(string $client_id);
 ```
 
 判断$client_id是否还在线
@@ -12,7 +12,7 @@ int Gateway::isOnline(int $client_id);
 
 * ```$client_id```
 
-全局唯一的客户端client_id
+客户端的client_id
 
 ## 返回值
 在线返回1，不在线返回0
