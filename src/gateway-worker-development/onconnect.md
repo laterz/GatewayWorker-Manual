@@ -2,7 +2,7 @@
 
 ## 说明:
 ```php
-void Event::onConnect(int $client_id);
+void Event::onConnect(string $client_id);
 ```
 
 当客户端连接上gateway进程时触发。
@@ -12,7 +12,7 @@ void Event::onConnect(int $client_id);
 
 ``` $client_id ```
 
-client_id为当前客户端socket连接的标识，是一个全局唯一的整数，唯一标识某个客户端socket连接。
+client_id固定为20个字的字符串，用来全局标记一个socket连接，每个客户端连接都会被分配一个全局唯一的client_id。
 
 如果client_id对应的客户端连接断开了，那么这个client_id也就失效了。当这个客户端再次连接到Gateway时，将会获得一个新的client_id。也就是说client_id和客户端的socket连接生命周期是一致的。
 
@@ -24,7 +24,7 @@ client_id为当前客户端socket连接的标识，是一个全局唯一的整�
 
 ## 注意
 
-``` $client_id ```是自动生成的并且无法自定义。值从1自增到21亿，大于21亿后又从1开始自增。
+``` $client_id ```是自动生成的并且无法自定义。
 
 
 ## onConnect范例
@@ -36,7 +36,7 @@ class Event
 
     public static function onConnect($client_id)
     {
-       Gateway::sendToCurrentClient('hello');
+       Gateway::sendToCurrentClient("Your client_id is $client_id");
     }
 
 }
