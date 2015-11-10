@@ -29,6 +29,8 @@ $gateway_text->name = 'TodpoleGatewayText';
 $gateway_text->count = 4;
 // 本机ip（分布式部署时需要设置成内网ip）
 $gateway_text->lanIp = '127.0.0.1';
+// 设置服务注册地址
+$gateway_text->registerAddress = '127.0.0.1:1236';
 // gateway内部通讯起始端口，起始端口不要重复
 $gateway_text->startPort = 2500;
 // 也可以设置心跳，这里省略
