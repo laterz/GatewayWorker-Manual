@@ -1,34 +1,21 @@
 # 在非WorkerMan项目中推送消息
 
 ## 需求
-有时候需要在非WorkerMan环境中向客户端推送数据。例如在一个普通的Web项目中通过WorkerMan推送数据（前提是已经部署了WorkerMan，客户端已经连接WorkerMan）。目前有三种比较方便方法推送数据。（本节内容主要是针对Gateway/Worker模型的推送方法的讲解）
+有时候需要在非GatewayWorker环境中向客户端推送数据。例如在一个普通的Web项目中通过GatewayWorker推送数据（前提是已经部署了GatewayWorker，客户端已经连接GatewayWorker）。目前有三种比较方便方法推送数据。
 
 ## 方法一、使用GatewayClient客户端推送
 **客户端地址：**
 
 https://github.com/walkor/GatewayClient
 
-**使用方法：**
-
-**注意：**如果项目与WorkerMan不在同一台服务器，需要安装redis，参考5.11 Config/Store配置章节。
-
-**注意：**如果项目与WorkerMan在同一台服务器，并且Config/Store.php中```$driver = self::DRIVER_FILE;```，需要将```Store::$storePath = sys_get_temp_dir().'/workerman-your-app/';```一行代码中```sys_get_temp_dir()```改成固定值，因为这个函数的返回值在两个项目可能不一致。
-
-
-1、拷贝WorkerMan项目中的Applications/YourApp/Config目录到GatewayClient下。
-
-拷贝后的GatewayClient目录结构如下
-```shell
-GatewayClient/
-├── Config
-│   └── Store.php
-└── Gateway.php
-```
-2、引入GatewayClient/Gateway.php文件开始使用。接口使用方法与\GatewayWorker\Lib\Gateway接口相同，接口说明参见5.5章节。
 
  **客户端使用示例**
  ```php
 require_once '/your/path/GatewayClient/Gateway.php';
+
+// 注意这里填写GatewayWorker的Register服务的ip（一般是内网ip）和端口（默认1236）
+// 如果是与GatewayWorker在同一台服务器，则填写127.0.0.1:1236
+Gateway::$registerAddress = '127.0.0.1:1236';
 
 Gateway::sendToAll('{"type":"broadcast","content":"hello all"}');
 
