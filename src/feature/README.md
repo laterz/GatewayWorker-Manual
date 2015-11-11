@@ -1,4 +1,4 @@
-# GatewayWorker项目的特性
+# GatewayWorker特性
 
 ### 1、基于Workerman开发
 GatewayWorker是基于Workerman开发的

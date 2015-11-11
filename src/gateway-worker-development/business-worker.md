@@ -13,11 +13,13 @@ BusinessWorker的相关回调函数在项目中的Event.php中定义，具体内
 
 和Worker一样，可以设置BusinessWorker进程的数量，以便充分利用多cpu资源
 
-3、onWorkerStart
+3、registerAddress，注册服务地址，只写格式类似于 '127.0.0.1:1236'
+
+4、onWorkerStart
 
 和Worker一样，可以设置BusinessWorker启动后的回调函数，一般在这个回调里面初始化一些全局数据
 
-4、onWorkerStop
+5、onWorkerStop
 
 和Worker一样，可以设置BusinessWorker关闭的回调函数，一般在这个回调里面做数据清理或者保存数据工作
 
