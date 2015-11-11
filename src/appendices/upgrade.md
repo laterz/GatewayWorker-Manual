@@ -25,6 +25,6 @@ class Gateway extends Worker
 
 4、Gateway::getOnlineStatus方法被删除，在2.0中请使用Gateway::getAllClientInfo替代，使用方法参见手册
 
-5、增加Lib/Gateway类增加unbindUid、getClientIdByUid、joinGroup、leaveGroup、sendToGroup、getClientCountByGroup、getClientInfoByGroup、getAllClientInfo等方法。
+5、Lib/Gateway类增加unbindUid、getClientIdByUid、joinGroup、leaveGroup、sendToGroup、getClientCountByGroup、getClientInfoByGroup、getAllClientInfo等方法。
 
 6、多端口（多协议）应用中，可以通过```$_SERVER['GATEWAY_PORT']```户识别客户端连接的是哪个端口（使用的哪种协议）
