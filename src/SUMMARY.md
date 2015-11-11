@@ -39,11 +39,11 @@
        * [为什么分布式部署](gateway-worker-development/why-distributed.md)
        * [如何分布式部署](gateway-worker-development/how-distributed.md)
        * [Gateway Worker分离部署](gateway-worker-development/gateway-worker-separation.md)
-   * [Config/Store 配置](gateway-worker-development/store-config.md)
 * [高级应用](advanced/README.md)
    * [在其它项目中推送消息](advanced/push.md)
    * [多协议支持](advanced/multi-protocols.md)
    * [运行多个gatewayWorker实例](advanced/multi-gatewayworker-instance.md)
 * [附录](appendices/README.md)
    * [使用mysql数据库](appendices/mysql.md)
+   * [1.0升级到2.0注意事项](appendices/upgrade.md)
 
