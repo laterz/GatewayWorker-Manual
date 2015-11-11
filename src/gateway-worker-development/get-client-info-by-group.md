@@ -1,11 +1,11 @@
-# \GatewayWorker\Lib\Gateway::getALLClientInfo
+# \GatewayWorker\Lib\Gateway::getClientInfoByGroup
 
 ## 说明:
 ```php
-array Gateway::getALLClientInfo(void);
+array Gateway::getClientInfoByGroup(mixed $group);
 ```
 
-获取当前所有在线用户信息。
+获取某个分组所有在线用户信息。
 
 
 ## 返回值
@@ -28,8 +28,11 @@ class Event
     ...
     public onMessage($client_id, $message)
     {
+        $group = 'room-1';
         $_SESSION['name'] = $message['name'];
-        var_export(Gateway::getOnlineStatus());
+        $_SESSION['sex'] = $message['sex'];
+        Gateway::joinGroup($client_id, $group);
+        var_export(Gateway::getClientInfoByGroup($group));
     }
     ...
 }
@@ -39,7 +42,7 @@ class Event
 打印出的数据类似如下：
 ```php
 array(
-    '7f00000108fc00000008' => array('name'=>'Tom'),
-    '7f00000108fc00000009' => array('name'=>'Joan'),
+    '7f00000108fc00000008' => array('name'=>'Tom', 'sex'=>1),
+    '7f00000108fc00000009' => array('name'=>'Joan', 'sex'=>0),
 )
 ```

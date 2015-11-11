@@ -1,7 +1,7 @@
 # Config/Store 配置
 
 ###配置作用
-配置Gateway/Worker模型中存储驱动类型及存储位置，以便Store类存储Gateway与BusinessWorker之间的通讯ip与端口，以及存储各个客户端的通讯ip与端口。
+老版本Config/Store是必须的，新版本中
 
 ### 配置示例及说明
 

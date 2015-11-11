@@ -13,7 +13,7 @@ void Gateway::sendToUid(mixed $uid, string $message);
 
 * ```$uid```
 
-uid可以是字符串、数字、或者包含uid的数组。如果uid为数组，则是给数组内所有uid发送数据
+uid可以是字符串、数字、或者包含uid的数组。如果为数组，则是给数组内所有uid发送数据
 
 * ```$message```
 
