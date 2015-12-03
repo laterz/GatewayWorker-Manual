@@ -5,7 +5,7 @@
 array Gateway::getClientInfoByGroup(mixed $group);
 ```
 
-获取某个分组所有在线用户信息。
+获取某个分组所有在线client_id信息。
 
 
 ## 返回值

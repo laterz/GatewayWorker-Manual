@@ -5,7 +5,7 @@
 array Gateway::getALLClientInfo(void);
 ```
 
-获取当前所有在线用户信息。
+获取当前所有在线client_id信息。
 
 
 ## 返回值
@@ -29,7 +29,7 @@ class Event
     public onMessage($client_id, $message)
     {
         $_SESSION['name'] = $message['name'];
-        var_export(Gateway::getOnlineStatus());
+        var_export(Gateway::getALLClientInfo());
     }
     ...
 }

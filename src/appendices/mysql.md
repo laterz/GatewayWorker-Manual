@@ -6,7 +6,7 @@
 ## 注意
 不要直接在```your_file.php```直接使用这个mysql类，会导致错误。请在```onXXXX```回调中使用这个数据库类。
 
-1、数据库配置XXX/Config/Db.php
+1、数据库配置XXX/Config/Db.php（如果没有此文件请手动创建）
 ```php
 <?php
 namespace Config;

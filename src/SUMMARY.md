@@ -4,6 +4,8 @@
 * [序言](preface/README.md)
 * [特性](feature/README.md)
 * [入门指引](getting-started/README.md)
+* [启动与停止](start-and-stop/README.md)
+* [工作原理](process-of-communication/README.md)
 * [定制通讯协议](protocols/README.md)
 * [基于GatewayWorker开发](gateway-worker-development/README.md)
    * [适用范围](gateway-worker-development/gateway-worker-development.md)

@@ -5,7 +5,9 @@
 void Gateway::unbindUid(string $client_id, mixed $uid);
 ```
 
-将client_id与uid解绑
+将client_id与uid解绑。
+
+注意：当client_id下线（连接断开）时会自动与uid解绑，开发者无需在onClose事件调用Gateway::unbindUid。
 
 
 ## 参数

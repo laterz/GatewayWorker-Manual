@@ -2,10 +2,14 @@
 
 ## 说明:
 ```php
-void Gateway::getClientIdByUid(mixed $uid);
+array Gateway::getClientIdByUid(mixed $uid);
 ```
 
-获取与uid绑定的所有client_id
+返回一个数组，数组元素为与uid绑定的所有在线的client_id。如果没有在线的client_id则返回一个空数组。
+
+此方法可以判断一个uid是否在线。
+
+注意：返回值为与uid绑定的所有在线的client_id数组。因为已经下线的client_id会自动与uid解绑，所以已经下线的client_id不会出现在返回值中。
 
 ## 参数
 

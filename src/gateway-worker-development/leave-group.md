@@ -5,7 +5,9 @@
 void Gateway::leaveGroup(string $client_id, mixed $group);
 ```
 
-将client_id从某个组中删除
+将client_id从某个组中删除。
+
+注意：当client_id下线（连接断开）时，client_id会自动从它所属的各个分组中删除，也就是在onClose回调中无需调用Gateway::leaveGroup
 
 
 ## 参数

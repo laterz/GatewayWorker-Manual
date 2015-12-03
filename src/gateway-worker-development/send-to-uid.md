@@ -5,7 +5,7 @@
 void Gateway::sendToUid(mixed $uid, string $message);
 ```
 
-向uid绑定的所有client_id发送数据。
+向uid绑定的所有**在线**client_id发送数据。
 
 注意：默认uid与client_id是一对多的关系，如果当前uid下绑定了多个client_id，则多个client_id对应的客户端都会收到消息，这类似于PC QQ和手机QQ同时在线接收消息。
 

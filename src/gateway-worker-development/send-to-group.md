@@ -5,7 +5,7 @@
 void Gateway::sendToGroup(mixed $group, string $message);
 ```
 
-向某个分组的所有client_id发送数据。
+向某个分组的所有在线client_id发送数据。
 
 
 ## 参数
