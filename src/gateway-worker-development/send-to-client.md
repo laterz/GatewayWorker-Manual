@@ -17,6 +17,11 @@ void Gateway::sendToClient(string $client_id, string $send_data);
 
 要发送的数据（字符串类型），此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
 
+### 返回值
+因为数据发送是异步进行的，所以没有返回值。一般来说只要客户端在线就可以发送成功。
+
+发送前先可以用Gateway::isOnline判断下客户端是否在线。
+
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;

@@ -27,6 +27,8 @@ void Gateway::joinGroup(string $client_id, mixed $group);
 
 只能是数字或者字符串。
 
+注意:group不能为空值。例如```0```,```0.0```,```'0'```,```"0"```,```false```,```null```是非法的group值。
+
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;

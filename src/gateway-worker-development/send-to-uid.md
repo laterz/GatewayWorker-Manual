@@ -19,6 +19,11 @@ uid可以是字符串、数字、或者包含uid的数组。如果为数组，�
 
 要发送的数据（字符串类型），此数据会被Gateway所使用协议的encode方法打包后再发送给客户端
 
+### 返回值
+因为数据发送是异步进行的，所以没有返回值。一般来说只要uid在线就可以发送成功。
+
+发送前先可以用Gateway::getClientIdByUid判断下uid是否有在线的client_id。
+
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
