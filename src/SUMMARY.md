@@ -45,6 +45,7 @@
    * [在其它项目中推送消息](advanced/push.md)
    * [多协议支持](advanced/multi-protocols.md)
    * [运行多个gatewayWorker实例](advanced/multi-gatewayworker-instance.md)
+   * [监控文件更新](advanced/file-monitor.md)
 * [附录](appendices/README.md)
    * [使用mysql数据库](appendices/mysql.md)
    * [1.0升级到2.0注意事项](appendices/upgrade.md)
