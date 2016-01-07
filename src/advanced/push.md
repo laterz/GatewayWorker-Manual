@@ -3,20 +3,31 @@
 ## 需求
 有时候需要在非GatewayWorker环境中向客户端推送数据。例如在一个普通的Web项目中通过GatewayWorker推送数据（前提是已经部署了GatewayWorker，客户端已经连接GatewayWorker）。目前有三种比较方便方法推送数据。
 
-## 方法一、使用GatewayClient客户端推送，提供的接口与GatewayWorker中的接口一致
+## 方法一、使用GatewayClient客户端推送，接口与GatewayWorker中的接口一致
 **客户端地址：**
 
 https://github.com/walkor/GatewayClient
 
+**注意：**
+
+如果GatewayClient和GatewayWorker不是在同一台服务器上，则需要先将start_gateway.php中的lanIp改成当前服务器的内网ip（如果不在一个内网可改成公网ip）。
+
+反之如果GatewayClient和GatewayWorker在同一台服务器上运行，则不用做任何更改，直接按照示例使用GatewayClient即可。
 
  **客户端使用示例**
  ```php
 require_once '/your/path/GatewayClient/Gateway.php';
 
-// 注意这里填写GatewayWorker的Register服务的ip（一般是内网ip）和端口（默认1236）
-// 如果是与GatewayWorker在同一台服务器，则填写127.0.0.1:1236
+/**
+ *====这个步骤是必须的====
+ *这里填写Register服务的ip（通常是运行GatewayWorker的服务器ip）和端口
+ *注意Register服务端口在start_register.php中可以找到（chat默认是1236）
+ *这里假设GatewayClient和Register服务都在一台服务器上，ip填写127.0.0.1
+ **/
 Gateway::$registerAddress = '127.0.0.1:1236';
 
+
+// 以下是调用示例
 Gateway::sendToAll('{"type":"broadcast","content":"hello all"}');
 
 Gateway::sendToClient($client_id,'{"type":"say","content":"hello"}');
@@ -25,6 +36,7 @@ Gateway::isOnline($client_id);
 
 ...
  ```
+
 
 ## 方法二、用一个特殊的账号当做管理客户端，通过这个账号推送数据
 
@@ -50,6 +62,8 @@ Autoloader::setRootPath(__DIR__);
 $internal_gateway = new Gateway("Text://192.168.100.100:7273");
 $internal_gateway->name='internalGateway';
 $internal_gateway->startPort = 2800;
+// 端口为start_register.php中监听的端口，聊天室默认是1236
+$internal_gateway->registerAddress = '127.0.0.1:1236';
 // #### 内部推送端口设置完毕 ####
 
 if(!defined('GLOBAL_START'))

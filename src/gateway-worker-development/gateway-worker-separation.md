@@ -1,15 +1,15 @@
 # gateway worker 分离部署
 
 ## 什么是Gateway Worker分离部署
-Gateway/Worker模式有两组进程，Gateway进程负责网络IO，Worker进程负责业务处理，Gateway与Worker之间使用TCP长连接通讯。当系统出现负载时，一般都是业务进程Worker出现瓶颈。我们可以把Gateway Worker分开部署在不同的服务器上，单独增加Worker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。
+GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorker进程负责业务处理，Gateway与BusinessWorker之间使用TCP长连接通讯。当系统出现高负载时，一般都是业务进程BusinessWorker出现瓶颈。我们可以把Gateway BusinessWorker分开部署在不同的服务器上，单独增加BusinessWorker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。
 
 # 部署示例
 
-以Applications/Todpole为例，假如需要部署三台服务器提供高可用服务。瓶颈在worker进程，则可使用1台作为gateway服务器，另外两台做worker服务器。（如果瓶颈在gateway进程（一般是带宽瓶颈），则可以2台gateway机器，1台worker机器，部署方法类似）。
+以Applications/Todpole为例，假如需要部署三台服务器提供高可用服务。瓶颈在BusinessWorker进程，则可使用1台作为gateway服务器，另外两台做BusinessWorker服务器。（如果瓶颈在gateway进程（一般是带宽瓶颈），则可以2台gateway机器，1台BusinessWorker机器，部署方法类似）。
 
 
 ## gateway worker 分离部署扩容步骤
-1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）。另外集群统一使用192.168.0.1上的注册服务，以Gateway和BusinessWorker建立起连接。
+1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）。另外集群统一使用192.168.0.1上的Register服务，以便集群内的Gateway和BusinessWorker建立起连接。
 
 2、由于192.168.0.1这台机器只部署Gateway进程，所以将该服务器上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如
 
@@ -81,7 +81,7 @@ use \GatewayWorker\Gateway;
 
 1、由于Gateway只负责网络IO，只要服务器带宽够用，绝大多数情况下Gateway服务器不会成为瓶颈，所以在很长时间我们只需要一台或者少数几台Gateway服务器即可。由于我们不想BusinessWorker影响到Gateway，所以将Gateway和BusinessWorker分开部署
 
-2、BusinessWorker主要负责业务逻辑。当请求量增大时，由于可能BusinessWorker业务比较复杂，负载可能会明显升高，这时我们只要单纯增加BusinessWorker服务器即可，Gateway服务器则一般不需要变动，也就是不用通知客户端Gateway的ip有所变动
+2、BusinessWorker主要负责业务逻辑。当请求量增大时，由于可能BusinessWorker业务比较复杂，负载可能会明显升高，这时我们只要单纯增加BusinessWorker服务器即可，Gateway服务器则一般不需要变动，也就是不用通知客户端Gateway的ip列表有所变动
 
 3、当系统BusinessWorker负载较低，需要下线服务器时，我们只需要下线BusinessWorker服务器即可，无需变动GateWay服务器，也就不会导致客户端链接因为服务器下线而断开。
 

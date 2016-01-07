@@ -49,4 +49,7 @@
 * [附录](appendices/README.md)
    * [使用mysql数据库](appendices/mysql.md)
    * [1.0升级到2.0注意事项](appendices/upgrade.md)
+* [常见问题](faq/README)
+   * [如何获得客户端ip](faq/get-ip.md)
+   * [多协议如何区分端口](faq/get-gateway-port.md)
 
