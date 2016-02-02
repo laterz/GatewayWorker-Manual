@@ -6,7 +6,7 @@
 ## 注意
 不要直接在```your_file.php```直接使用这个mysql类，会导致错误。请在```onXXXX```回调中使用这个数据库类。
 
-1、数据库配置XXX/Config/Db.php（如果没有此文件请手动创建）
+1、数据库配置Applications/项目/Config/Db.php（如果没有此文件请手动创建），例如聊天室的话就是Applications/Chat/Config/Db.php
 ```php
 <?php
 namespace Config;
@@ -18,31 +18,31 @@ class Db
 {
     /**
      * 数据库的一个实例配置，则使用时像下面这样使用
-     * $user_array = Db::instance('user')->select('name,age')->from('users')->where('age>12')->query();
+     * $user_array = Db::instance('db1')->select('name,age')->from('users')->where('age>12')->query();
      * 等价于
-     * $user_array = Db::instance('user')->query('SELECT `name`,`age` FROM `users` WHERE `age`>12');
+     * $user_array = Db::instance('db1')->query('SELECT `name`,`age` FROM `users` WHERE `age`>12');
      * @var array
      */
-    public static $user = array(
+    public static $db1 = array(
         'host'    => '127.0.0.1',
         'port'    => 3306,
         'user'    => 'your_user_name',
         'password' => 'your_password',
-        'dbname'  => 'user',
+        'dbname'  => 'your_db_name',
         'charset'    => 'utf8',
     );
 }
 ```
 
 
-2、XXX/Event.php
+2、项目/Event.php
 ```php
 <?php
 use \GatewayWorker\Lib\Gateway;
 use \GatewayWorker\Lib\Db;
 
 /**
- * 数据库示例，假设有个user库，里面有个user表
+ * 数据库示例，假设有个your_db_name库，里面有个user表
  */
 class Event
 {
@@ -50,7 +50,7 @@ class Event
    /**
     * 有消息时触发该方法，根据发来的命令打印2个用户信息
     * @param int $client_id 发消息的client_id
-    * @param string $message 消息
+    * @param mixed $message 消息
     * @return void
     */
    public static function onMessage($client_id, $message)
@@ -63,7 +63,7 @@ class Event
             return;
         }
         // 获取用户列表（这里是临时的一个测试数据库）
-        $ret = Db::instance('user')->select('*')->from('users')->where('uid>3')->offset(5)->limit(2)->query();
+        $ret = Db::instance('db1')->select('*')->from('users')->where('uid>3')->offset(5)->limit(2)->query();
         // 打印结果
         return Gateway::sendToClient($client_id, var_export($ret, true));
    }
@@ -87,7 +87,7 @@ class Db
         'port'    => 3306,
         'user'    => 'mysql_user',
         'password' => 'mysql_password',
-        'dbname'  => 'db1',
+        'dbname'  => 'database_name1',
         'charset'    => 'utf8',
     );
 
@@ -97,7 +97,7 @@ class Db
         'port'    => 3306,
         'user'    => 'mysql_user',
         'password' => 'mysql_password',
-        'dbname'  => 'db2',
+        'dbname'  => 'database_name2',
         'charset'    => 'utf8',
     );
 }

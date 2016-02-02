@@ -37,7 +37,7 @@ class Event
     public static function onMessage($client_id, $message)
     {
         // 群聊，转发请求给其它所有的客户端
-        return GateWay::sendToAll($message));
+        return GateWay::sendToAll($message);
     }
 
 }

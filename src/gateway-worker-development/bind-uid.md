@@ -17,6 +17,8 @@ void Gateway::bindUid(string $client_id, mixed $uid);
 
 3、client_id下线（连接断开）时会自动执行解绑，开发者无需调用Gateway::unbindUid解绑。
 
+4、映射关系存储在Gateway进程内存中
+
 ## 参数
 
 * ```$client_id```
@@ -26,6 +28,7 @@ void Gateway::bindUid(string $client_id, mixed $uid);
 * ```$uid```
 
 uid,可以是数字或者字符串。
+
 
 ## 范例
 ```php

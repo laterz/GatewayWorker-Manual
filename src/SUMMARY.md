@@ -11,6 +11,10 @@
    * [适用范围](gateway-worker-development/gateway-worker-development.md)
    * [Gateway类的使用](gateway-worker-development/gateway.md)
    * [BusinessWorker类的使用](gateway-worker-development/business-worker.md)
+       * [属性及回调](gateway-worker-development/property-and-callback.md)
+           * [eventHandler](gateway-worker-development/event-handler.md)
+           * [processTimeout](gateway-worker-development/process-timeout.md)
+           * [processTimeoutHandler](gateway-worker-development/process-timeout-handler.md)
    * [Register类的使用](gateway-worker-development/register.md)
    * [Event类的回调接口](gateway-worker-development/event-functions.md)
        * [onConnect](gateway-worker-development/onconnect.md)
@@ -50,6 +54,7 @@
    * [使用mysql数据库](appendices/mysql.md)
    * [1.0升级到2.0注意事项](appendices/upgrade.md)
 * [常见问题](faq/README)
+   * [查看GatewayWorker版本](faq/get-gateway-version.md)
    * [如何获得客户端ip](faq/get-ip.md)
    * [多协议如何区分端口](faq/get-gateway-port.md)
 

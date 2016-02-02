@@ -34,7 +34,7 @@ https://github.com/walkor/GatewayWorker
 ```php start.php start -d```
 
 ## 测试
-使用telnet命令测试（不要使用windows再带的telnet测试）
+使用telnet命令测试（不要使用windows自带的telnet测试）
 ```shell
  telnet 127.0.0.1 8282
 Trying 127.0.0.1...
