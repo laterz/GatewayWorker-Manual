@@ -18,7 +18,7 @@ void Gateway::closeClient(string $client_id);
 ```php
 use \GatewayWorker\Lib\Gateway;
 
-class Event
+class Events
 {
     ...
 

@@ -23,7 +23,7 @@ void Gateway::sendToAll(string $send_data [, array $client_id_array=array()]);
 ```php
 use \GatewayWorker\Lib\Gateway;
 
-class Event
+class Events
 {
     ...
 

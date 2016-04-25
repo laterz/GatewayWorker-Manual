@@ -38,7 +38,7 @@ $gateway->pingData = '{"type":"ping"}';
 
 ``` Gateway::$pingNotResponseLimit ```
 
-客户端连续$pingNotResponseLimit次$pingInterval时间内不回应心跳则断开链接。
+客户端连续```$pingNotResponseLimit```次```$pingInterval```时间内不回应心跳则断开链接。
 如果设置为0代表客户端不用发送回应数据，即通过TCP层面检测连接的连通性（极端情况至少10分钟才能检测到）
 
 ``` Gateway::$pingData ```

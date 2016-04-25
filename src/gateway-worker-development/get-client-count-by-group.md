@@ -22,7 +22,7 @@ int Gateway::getClientCountByGroup(mixed $group);
 ```php
 use \GatewayWorker\Lib\Gateway;
 
-class Event
+class Events
 {
     ...
     public onConnect($client_id)

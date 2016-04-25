@@ -1,11 +1,6 @@
 # GatewayWorker2.0 手册
 本手册适用于最新版本GatewayWorker2.0(发布时间2015-11-11)。
 
-GatewayWorker1.0手册参见[http://www.workerman.net/gatewaydoc-1.0/](http://www.workerman.net/gatewaydoc-1.0/)
-
-## 1.0与2.0的差异
-参见附录 1.0升级到2.0注意事项 一节
-
 ## GatewayWorker 手册
 GatewayWorker基于Workerman开发的一个项目框架，用于快速开发TCP长连接应用，例如app推送服务端、即时IM服务端、游戏服务端、物联网、智能家居等等
 
@@ -20,11 +15,14 @@ Workerman可以看做是一个纯粹的socket类库，可以开发几乎所有�
 
 ## GatewayWorker 源码地址
 
-https://github.com/walkor/GatewayWorker
+Linux版本：https://github.com/walkor/GatewayWorker
+
+Windows版本：https://github.com/walkor/GatewayWorker-for-win
+
 
 ## Applications\YourApp测试方法
 
-##启动
+##启动（Linux版本）
 以debug方式启动
 
 ```php start.php start```

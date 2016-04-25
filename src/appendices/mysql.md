@@ -3,8 +3,74 @@
 ## 说明
 常驻内存的程序在使用mysql时经常会遇到```mysql gone away```的错误，这个是由于程序与mysql的连接长时间没有通讯，连接被mysql服务端踢掉导致。GatewayWorker提供了一个mysql类，可以解决这个问题，当发生```mysql gone away```错误时，会自动重试一次。
 
+## 提示
+该mysql类依赖[pdo](http://php.net/manual/zh/book.pdo.php)和[pdo_mysql](http://php.net/manual/zh/ref.pdo-mysql.php)两个扩展，缺少扩展会报```Undefined class constant 'MYSQL_ATTR_INIT_COMMAND' in ....```错误。
+
+命令行运行```php -m```会列出所有php cli已安装的扩展，如果没有pdo 或者 pdo_mysql，请自行安装。
+
+centos系统
+```
+yum install php-pdo
+yum install php-mysql
+```
+
+ubuntu/debian系统
+```
+apt-get install php5-mysql
+```
+
+如果以上方法无法安装，请参考[workerman手册-附录-扩展安装](http://doc3.workerman.net/appendices/install-extension.html)一节安装。
+
 ## 注意
-不要直接在```your_file.php```直接使用这个mysql类，会导致错误。请在```onXXXX```回调中使用这个数据库类。
+请在```onXXXX```回调中使用数据库类。在```Worker::runAll();```前初始化数据库单例会导致数据错乱，参看下面例子中错误用法部分和正确用法部分。
+
+```php
+use \Workerman\Worker;
+use \GatewayWorker\BusinessWorker;
+use \Workerman\Autoloader;
+use \GatewayWorker\Lib\Db;
+
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+Autoloader::setRootPath(__DIR__);
+
+/*
+ * ## 错误用法 ###
+ * 没有在onXXX回调环境中(在Worker::runAll()之前)实例化单例数据库会导致数据库错误风险
+ * 原因：这部分代码属于主进程部分，主进程初始化了数据库单例，
+ * 子进程会继承这个数据库单例(包括其中的数据库链接资源)，
+ * 当mysql返回数据时，所有子进程都可以通过这个连接读取返回数据，
+ * 导致数据错乱。
+ * 同理：其它单例的连接资源(memcache\redis等)也不能在Worker::runAll前初始化。
+ */
+Db::instance('db1')->select('name,age')->from('users')->where('age>12')->query();
+
+$worker = new BusinessWorker();
+$worker->name = 'YourAppBusinessWorker';
+$worker->count = 4;
+$worker->registerAddress = '127.0.0.1:1238';
+
+/*
+ * ## 正确用法 ##
+ * onXXX中是可以使用数据库单例，
+ * 因为onXXX都是在Worker::runAll()之后运行的，属于子进程代码。
+ * 这里初始化的数据库单例只属于当前子进程自己所有，
+ * 不会因为进程继承导致的连接上数据错乱。
+ *
+ * Event:onXXX也是运行在子进程的，可以安全的使用数据库类。
+ */
+$worker->onWorkerStart = function()
+{
+    Db::instance('db1')->select('name,age')->from('users')->where('age>12')->query();
+};
+
+// 如果不是在根目录启动，则运行runAll方法
+if(!defined('GLOBAL_START'))
+{
+    Worker::runAll();
+}
+```
+
+## 数据库使用方法
 
 1、数据库配置Applications/项目/Config/Db.php（如果没有此文件请手动创建），例如聊天室的话就是Applications/Chat/Config/Db.php
 ```php

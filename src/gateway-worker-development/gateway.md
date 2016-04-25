@@ -56,4 +56,4 @@ Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提�
 
 11、onClose（比较少用到，开发者一般不用关注）
 
-和Worker一样，可以设置onClose回调，当有客户端连接关闭时触发。同样与Event::onClose的区别是Gateway::onClose是运行在Gateway进程上，无法使用\GatewayWorker\Lib\Gateway类提供的接口
+和Worker一样，可以设置onClose回调，当有客户端连接关闭时触发。同样与Events::onClose的区别是Gateway::onClose是运行在Gateway进程上，无法使用\GatewayWorker\Lib\Gateway类提供的接口

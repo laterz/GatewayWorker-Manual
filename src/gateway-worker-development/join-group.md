@@ -32,7 +32,7 @@ void Gateway::joinGroup(string $client_id, mixed $group);
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 

@@ -24,7 +24,7 @@ group可以是字符串、数字、或者数组。如果为数组，则是给数
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 

@@ -23,7 +23,7 @@ array(
 ```php
 use \GatewayWorker\Lib\Gateway;
 
-class Event
+class Events
 {
     ...
     public onMessage($client_id, $message)

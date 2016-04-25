@@ -1,8 +1,8 @@
-# Event::onMessage
+# Events::onMessage
 
 ## 说明:
 ```php
-void Event::onMessage(string $client_id, mixed $recv_data);
+void Events::onMessage(string $client_id, mixed $recv_data);
 ```
 
 当收到一个客户端请求后触发
@@ -25,7 +25,7 @@ void Event::onMessage(string $client_id, mixed $recv_data);
 ```php
 use \GatewayWorker\Lib\Gateway;
 
-class Event
+class Events
 {
 
     /**

@@ -14,6 +14,8 @@ https://github.com/walkor/GatewayClient
 
 反之如果GatewayClient和GatewayWorker在同一台服务器上运行，则不用做任何更改，直接按照示例使用GatewayClient即可。
 
+注意：通过GatewayClient发送的数据不会经过Event.php，而是直接经由Gateway进程转发给客户端。
+
  **客户端使用示例**
  ```php
 require_once '/your/path/GatewayClient/Gateway.php';

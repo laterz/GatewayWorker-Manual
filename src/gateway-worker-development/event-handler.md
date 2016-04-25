@@ -10,7 +10,9 @@ callback BusinessWorker::$eventHandler
 (此属性一般不用设置)
 
 
-设置使用哪个类来处理业务，默认值是```Event```，即默认使用Event.php中的Event类来处理业务。业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现。
+设置使用哪个类来处理业务，默认值是```Events```，即默认使用Events.php中的Events类来处理业务。业务类至少要实现onMessage静态方法，onConnect和onClose静态方法可以不用实现。
+
+``` (注意：Gateway 2.0.4版本以前业务处理类默认为Event，为了避免和Event扩展冲突，2.0.4版本以后统一改成Events) ```
 
 ## 范例
 Applications\项目\start_businessworker.php

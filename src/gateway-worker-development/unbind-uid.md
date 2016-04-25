@@ -23,7 +23,7 @@ void Gateway::unbindUid(string $client_id, mixed $uid);
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 

@@ -17,4 +17,4 @@
 
 9、客户端发的数据全部由Gateway转发给Worker处理，Worker将处理结果再由Gateway返回给客户端
 
-10、Worker的业务逻辑入口全部在Event.php中，包括onConnect连接事件、onMessage消息事件、onClose连接关闭事件
+10、Worker的业务逻辑入口全部在Events.php中，包括onWorkerStart进程启动事件、onConnect连接事件、onMessage消息事件、onClose连接关闭事件、onWorkerStop进程退出事件

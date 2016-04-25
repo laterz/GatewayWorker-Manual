@@ -25,7 +25,7 @@ void Gateway::sendToClient(string $client_id, string $send_data);
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 

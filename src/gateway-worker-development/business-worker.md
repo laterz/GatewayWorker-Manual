@@ -23,17 +23,22 @@ BusinessWorker的相关回调函数在项目中的Event.php中定义，具体内
 
 和Worker一样，可以设置BusinessWorker关闭的回调函数，一般在这个回调里面做数据清理或者保存数据工作
 
-## 业务处理类 Event
+## 业务处理类 Events
 
-Event类为业务处理的入口文件，当有客户端事件发生时会触发相应的回调如下：
+Events类为业务处理的入口文件，当有客户端事件发生时会触发相应的回调如下：
+``` (注意：Gateway 2.0.4版本以前业务处理类为Event，为了避免和Event扩展冲突，2.0.4版本以后统一改成Events类) ```
 
-1、当客户端连接到Gateway时，会触发```Event::onConnect($client_id)```回调。
+1、每个BusinessWorker进程启动时，都会触发```Events::onWorkerStart($businessworker)```回调```（此特性Gateway版本>=2.0.4才支持）```。
 
-2、当客户端发来数据时，会触发```Event::onMessage($client_id, $data)```回调。
+2、当客户端连接到Gateway时，会触发```Events::onConnect($client_id)```回调。
 
-3、当客户端关闭时，会触发```Event::onClose($client_id)```回调。
+3、当客户端发来数据时，会触发```Events::onMessage($client_id, $data)```回调。
 
-**Event详细文档参见下一节**
+4、当客户端关闭时，会触发```Events::onClose($client_id)```回调。
+
+5、每个BusinessWorker进程退出时，都会触发```Events::onWorkerStop($businessworker)```回调```（此特性Gateway版本>=2.0.4才支持）```。注意如果进程是非正常退出，例如被kill可能无法触发```onWorkerStop```。
+
+**Events详细文档参见下一节**
 
 
 

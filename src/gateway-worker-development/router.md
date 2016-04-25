@@ -9,34 +9,34 @@ callback Gateway::$router
 
 期待该回调函数从所有到BusinessWorker进程的连接对象中选择一个并返回。
 
-**注意：之前（2015-09-22日之前）版本GatewayWorker默认使用的是随机路由，也就是同一个client_id的onConnect/onMessage/onClose事件可能被不同的BusinessWorker进程处理，带来的问题是onConnect/onMessage/onClose可能并发执行甚至乱序执行。并且与client_id有绑定关系的定时器时可能与预期效果不符，例如同一个client_id的onConnect回调设置的定时器在onClose中可能无法删除，原因是两个回调可能被分配到不同的BusinessWorker进程处理。以上问题在2015-09-22之后的版本通过绑定路由得到了修正，开发者到原来应用下载地址重新下载自己的应用即可得到最新的GatewayWorker版本**
-
 
 ## 回调函数的参数
 
 ``` $worker_connnections ```
 
-是一个数组，里面包含了所有到BusinessWorker进程的连接对象。数组的key为BusinessWorker进程的通讯地址，格式为ip:port。回调函数最终将返回该数组中一个连接对象。
+是一个包含了所有到BusinessWorker进程的连接对象数组。数组的下标是格式为ip:worker_name:worker_id的字符串。其中ip为worker所在服务器的ip，worker_name为```$businessworker->name```的值([name属性参见workerman手册](http://doc3.workerman.net/worker-development/name.html))，worker_id为自动分配的进程id编号([进程编号参见workerman手册](http://doc3.workerman.net/worker-development/workerid.html))。这样通过下标就可以知道连接对应的worker在哪个服务器，属于哪组worker，进程编号是多少，可以方便的将消息路由给期望的服务器上的进程中去处理。
+
+（注意：GatewayWorker2.0.4之前版本数组下标为ip:port，并非ip:worker_name:worker_id）
 
 
 ``` $client_connection ```
 
-客户端连接对象,可以通过此对象获得客户端ip端口等信息
+客户端连接对象,可以通过此对象获得客户端ip端口等信息，也可以向其添加一些动态属性用来保存当前连接的相关信息。
 
 ``` $cmd ```
 
 当前什么类型的消息，是个数字，分别可能为
 
-1: CMD_ON_CONNECTION，即连接事件
+CMD_ON_CONNECTION，即连接事件
 
-2: CMD_ON_MESSAGE，即消息事件
+CMD_ON_MESSAGE，即消息事件
 
-3: CMD_ON_CLOSE，即客户端关闭事件
+CMD_ON_CLOSE，即客户端关闭事件
 
 
 ``` $buffer ```
 
-客户端发来的数据。注意只有当 ``` $cmd ``` 为``` 2 ```时 ```$buffer ```才有值
+客户端发来的数据。注意只有当 ``` $cmd ``` 为``` CMD_ON_MESSAGE ```时 ```$buffer ```才有值
 
 ## 返回值
 返回 ```$worker_connnections``` 中的一个连接对象

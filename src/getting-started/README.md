@@ -5,7 +5,7 @@
 .
 ├── Applications // 这里是所有开发者应用项目
 │   └── YourApp  // 其中一个应用目录，目录名可以自定义
-│       ├── Event.php // 开发者只需要关注这个文件
+│       ├── Events.php // 开发者只需要关注这个文件
 │       ├── start_gateway.php // gateway进程启动脚本
 │       ├── start_businessworker.php // businessWorker进程启动脚本
 │       └── start_register.php // 注册服务启动脚本
@@ -31,19 +31,19 @@
 
 开发者只需要关注Applications/YourApp目录的文件即可（YourApp是项目名，可自定义），其它目录如GatewayWorker和Workerman目录为框架目录，开发者不要改动，这样方便后续框架升级。
 
-一般来说开发者只需要关注Applications/YourApp/Event.php。因为所有业务代码都在这里开始的。
+一般来说开发者只需要关注Applications/YourApp/Events.php。因为所有业务代码都在这里开始的。
 
 其它start_gateway.php start_businessworker.php start_register.php分别是进程启动脚本，开发者一般不需要改动这三个文件。三个脚本统一由根目录的start.php启动。
 
 
-## Event.php
+## Events.php
 
 例如下面是一个简单的聊天室示例
 
 ```php
 <?php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     /**
      * 当客户端连接时触发
@@ -81,23 +81,24 @@ class Event
 }
 ```
 
-Event.php中定义三个事件回调方法，
+Events.php中定义5个事件回调方法，
 
+  * onWorkerStart businessWorker进程启动事件
   * onConnect 连接事件
   * onMessage 消息事件
   * onClose   连接断开事件
+  * onWorkerStop businessWorker进程退出事件
 
 
-```三个回调接口说明参见 Event类的回调接口 一节```
+```5个回调接口说明参见 Events类的回调接口 一节```
 
-其中消息事件onMessage是必须的，onConnect和onClose事件回调可以不用实现。
-例如下面Event.php只实现了onMessage回调，onConnect和onClose事件将被忽略。
+其中消息事件onMessage是必须的，其它事件回调可以不实现。
 
 
 ```php
 <?php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
    /**
     * 当客户端发来消息时触发

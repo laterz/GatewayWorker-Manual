@@ -27,7 +27,7 @@ uid可以是字符串、数字、或者包含uid的数组。如果为数组，�
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 

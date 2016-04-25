@@ -7,3 +7,5 @@ GatewayWorker是常驻内存的，磁盘上的文件更改后需要reload或者r
 代码地址在：https://github.com/walkor/workerman-filemonitor
 
 把FileMonitor目录放到你的Applications下重启即可。
+
+```注意：文件监控组件不支持windows系统```

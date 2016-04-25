@@ -23,7 +23,7 @@ uid,可以是数字或者字符串。
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
-class Event
+class Events
 {
     ...
 
