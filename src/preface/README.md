@@ -12,7 +12,10 @@ Gateway只负责网络IO（非阻塞），Worker负责处理业务。
 GatewayWorker的通信协议是开放的，又是可定制的，因此，理论上GatewayWorker可以与使用任意协议的任意平台的客户端进行通信。当用户开发客户端时，可以根据相应的通信协议完成与服务端的通信。
 
 # 本手册作用范围
-本手册主要是针对GatewayWorker项目
+本手册主要是针对GatewayWorker项目。
+
+# 注意
+###GatewayWorker是基于Workerman开发的，在阅读GatewayWorker手册前，请先阅读[Workerman手册](http://doc3.workerman.net/)。
 
 
 

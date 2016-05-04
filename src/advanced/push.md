@@ -4,9 +4,17 @@
 有时候需要在非GatewayWorker环境中向客户端推送数据。例如在一个普通的Web项目中通过GatewayWorker推送数据（前提是已经部署了GatewayWorker，客户端已经连接GatewayWorker）。目前有三种比较方便方法推送数据。
 
 ## 方法一、使用GatewayClient客户端推送，接口与GatewayWorker中的接口一致
-**客户端地址：**
+**客户端源码：**
 
 https://github.com/walkor/GatewayClient
+
+GatewayWorker1.0请使用[1.0版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/v1.0)
+
+GatewayWorker版本大于2.0.0小于 2.0.4请使用[2.0.4版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.4)
+
+GatewayWorker2.0.5及以上版本请使用[2.0.5版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.5)
+
+查看GatewayWorker版本请[点击这里](/gatewaydoc/faq/get-gateway-version.html)
 
 **注意：**
 
@@ -29,13 +37,20 @@ require_once '/your/path/GatewayClient/Gateway.php';
 Gateway::$registerAddress = '127.0.0.1:1236';
 
 
-// 以下是调用示例
+// 以下是调用示例，接口与GatewayWorker环境的接口一致
+// 注意除了不支持sendToCurrentClient和closeCurrentClient方法
+// 其它方法都支持
 Gateway::sendToAll('{"type":"broadcast","content":"hello all"}');
 
 Gateway::sendToClient($client_id,'{"type":"say","content":"hello"}');
 
 Gateway::isOnline($client_id);
 
+Gateway::bindUid($client_id, $uid);
+
+Gateway::sendToUid($client_id, $uid);
+
+Gateway::getSession($client_id);
 ...
  ```
 
