@@ -13,6 +13,9 @@ void Gateway::updateSession(string $client_id, array $session);
 
 2、```Gateway::updateSession($client_id, $update_session)```部分更新。
 
+## 注意：
+不要```$_SESSION```赋值与Gateway::updateSession同时操作同一个```$client_id```，可能会造成session值与预期效果不符。操作当前用户用```$_SESSION['xx']=xxx```方式赋值即可，操作其他用户```session```可以使用```Gateway::updateSession```接口。
+
 
 ## 参数
 

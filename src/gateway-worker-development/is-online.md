@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::isOnline
+# Gateway::isOnline
 
 ## 说明:
 ```php

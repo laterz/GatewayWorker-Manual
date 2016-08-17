@@ -2,15 +2,19 @@
 GatewayWorker提供的所有接口都是支持分布式调用的，所以业务代码不需要任何更改，直接就可以分布式部署。
 
 # 如何分布式GatewayWorker
-##关键点
+GatewayWorker通过Register服务来建立划分集群。同一集群使用相同的Register服务，即Gateway 和 businessWorker的注册服务地址(```$gateway->registerAddress``` ```$businessworker->registerAddress```)指向同一台Register服务。
+
+Gateway BusinessWorker Register之间如何工作的，请看[这里](/gatewaydoc/process-of-communication/README.html)。
+
+##分布式部署的关键步骤
 
 ### 1、设置Gateway启动脚本(一般是start_gateway.php)中的```lanIp```与当前服务器内网ip一致
-### 2、将Gateway 和 businessWorker的注册服务地址设置成相同地址。
+### 2、将Gateway 和 businessWorker的注册服务地址(registerAddress)设置成相同地址。
 
 ## 部署示例
 以Applications/Demo为例，假如需要部署三台服务器(192.168.1.1-3)提供高可用服务。
 
-1、选择一台服务器运行统一的注册服务，这里选择192.168.1.1，注册服务的端口为1236（实际上每台服务器上1236端口都运行这注册服务）
+1、选择一台服务器运行统一的Register服务，这里选择192.168.1.1，Register服务的端口为1236（其它服务器上的Register服务可以删除或者注释掉）
 
 2、配置三台服务器start_gateway.php start_businessworker.php中的registerAddress为'192.168.1.1:1236'。
 

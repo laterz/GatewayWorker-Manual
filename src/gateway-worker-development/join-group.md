@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::joinGroup
+# Gateway::joinGroup
 
 ## 说明:
 ```php
@@ -7,15 +7,20 @@ void Gateway::joinGroup(string $client_id, mixed $group);
 
 将client_id加入某个组，以便通过```Gateway::sendToGroup```发送数据。
 
-可以通过```Gateway::getClientInfoByGroup```获得该组所有在线成员数据。
+可以通过```Gateway::getClientSessionsByGroup($group)```获得该组所有在线成员数据。
+可以通过```Gateway::getClientCountByGroup($group)```获得该组所有在线连接数（人数）。
 
 该方法对于分组发送数据例如房间广播非常有用。
 
 **注意：**
 
-同一个client_id可以加入多个分组，以便接收不同组发来的数据。
+1、同一个client_id**可以**加入多个分组，以便接收不同组发来的数据。
 
-当client_id下线（连接断开）后，该client_id会自动从该分组中删除，开发者无需调用```Gateway::leaveGroup```。
+2、当client_id下线（连接断开）后，该client_id会自动从该分组中删除，开发者无需调用```Gateway::leaveGroup```。
+
+3、如果对应分组的所有client_id都下线，则对应分组会被自动删除。
+
+4、目前没有提供获得所有分组id接口，所有分组名称可以自行存入数据库中。
 
 ## 参数
 

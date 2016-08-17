@@ -8,6 +8,9 @@ void Gateway::setSession(string $client_id, array $session);
 
 设置某个client_id对应的session。如果对应client_id已经下线或者不存在，则会被忽略。
 
+## 注意：
+不要```$_SESSION```赋值与Gateway::setSession同时操作同一个```$client_id```，可能会造成session值与预期效果不符。操作当前用户用```$_SESSION['xx']=xxx```方式赋值即可，操作其他用户```session```可以使用```Gateway::setSession```接口。
+
 ## 参数
 
 * ```$client_id```

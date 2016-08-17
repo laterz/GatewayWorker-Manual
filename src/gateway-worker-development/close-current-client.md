@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::closeCurrentClient
+# Gateway::closeCurrentClient
 
 ## 说明:
 ```php

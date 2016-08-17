@@ -13,7 +13,7 @@
 
 2、Gateway与Worker之间是基于socket长连接通讯，也就是说Gateway、Worker可以部署在不同的服务器上，非常容易实现分布式部署，扩容服务器
 
-3、Gateway进程只负责网络IO，业务实现都在Worker进程上，可以reload Worker进程，实现不影用户的情况下实现代码热更新
+3、Gateway进程只负责网络IO，业务实现都在Worker进程上，可以reload Worker进程，实现在不影用户的情况下完成代码热更新。
 
 
 **适用范围：**

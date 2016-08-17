@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::sendToUid
+# Gateway::sendToUid
 
 ## 说明:
 ```php

@@ -18,7 +18,6 @@ use \GatewayWorker\Gateway;
 
 // 自动加载类
 require_once __DIR__ . '/../../Workerman/Autoloader.php';
-Autoloader::setRootPath(__DIR__);
 
 // ##########新增端口支持Text协议 开始##########
 // 新增8283端口，开启Text文本协议

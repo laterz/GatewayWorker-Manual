@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::unbindUid
+# Gateway::unbindUid
 
 ## 说明:
 ```php

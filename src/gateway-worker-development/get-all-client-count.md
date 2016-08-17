@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::getAllClientCount
+# Gateway::getAllClientCount
 
 ## 说明:
 ```php

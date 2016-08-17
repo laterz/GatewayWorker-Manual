@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="8.6.7" data-basepath=".." data-revision="1462419379970">
+    <div class="book"  data-level="8.6.7" data-basepath=".." data-revision="1471420417599">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -269,7 +269,7 @@
         <li class="chapter " data-level="8.5" data-path="gateway-worker-development/event-functions.html">
             
             <a href="../gateway-worker-development/event-functions.html">
-                <i class="fa fa-check"></i> <b>8.5.</b> Events类的回调接口
+                <i class="fa fa-check"></i> <b>8.5.</b> Events类的回调属性
             </a>
             
             
@@ -471,10 +471,10 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6.16" data-path="gateway-worker-development/get-client-info-by-group.html">
+        <li class="chapter " data-level="8.6.16" data-path="gateway-worker-development/get-client-sessions-by-group.html">
             
-            <a href="../gateway-worker-development/get-client-info-by-group.html">
-                <i class="fa fa-check"></i> <b>8.6.16.</b> getClientInfoByGroup
+            <a href="../gateway-worker-development/get-client-sessions-by-group.html">
+                <i class="fa fa-check"></i> <b>8.6.16.</b> getClientSessionsByGroup
             </a>
             
             
@@ -489,10 +489,10 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6.18" data-path="gateway-worker-development/get-online-status.html">
+        <li class="chapter " data-level="8.6.18" data-path="gateway-worker-development/get-all-client-sessions.html">
             
-            <a href="../gateway-worker-development/get-online-status.html">
-                <i class="fa fa-check"></i> <b>8.6.18.</b> getALLClientInfo
+            <a href="../gateway-worker-development/get-all-client-sessions.html">
+                <i class="fa fa-check"></i> <b>8.6.18.</b> getAllClientSessions
             </a>
             
             
@@ -803,7 +803,7 @@
     
         <a href="../gateway-worker-development/register.html" title="Register类的使用" class="chapter done " data-progress="8.4" style="left: 32.8125%;"></a>
     
-        <a href="../gateway-worker-development/event-functions.html" title="Events类的回调接口" class="chapter done " data-progress="8.5" style="left: 34.375%;"></a>
+        <a href="../gateway-worker-development/event-functions.html" title="Events类的回调属性" class="chapter done " data-progress="8.5" style="left: 34.375%;"></a>
     
         <a href="../gateway-worker-development/onworkerstart.html" title="onWorkerStart" class="chapter done " data-progress="8.5.1" style="left: 35.9375%;"></a>
     
@@ -847,11 +847,11 @@
     
         <a href="../gateway-worker-development/get-client-count-by-group.html" title="getClientCountByGroup" class="chapter  " data-progress="8.6.15" style="left: 67.1875%;"></a>
     
-        <a href="../gateway-worker-development/get-client-info-by-group.html" title="getClientInfoByGroup" class="chapter  " data-progress="8.6.16" style="left: 68.75%;"></a>
+        <a href="../gateway-worker-development/get-client-sessions-by-group.html" title="getClientSessionsByGroup" class="chapter  " data-progress="8.6.16" style="left: 68.75%;"></a>
     
         <a href="../gateway-worker-development/get-all-client-count.html" title="getAllClientCount" class="chapter  " data-progress="8.6.17" style="left: 70.3125%;"></a>
     
-        <a href="../gateway-worker-development/get-online-status.html" title="getALLClientInfo" class="chapter  " data-progress="8.6.18" style="left: 71.875%;"></a>
+        <a href="../gateway-worker-development/get-all-client-sessions.html" title="getAllClientSessions" class="chapter  " data-progress="8.6.18" style="left: 71.875%;"></a>
     
         <a href="../gateway-worker-development/set-session.html" title="setSession" class="chapter  " data-progress="8.6.19" style="left: 73.4375%;"></a>
     
@@ -894,7 +894,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_28">
+                    <section class="normal" id="section-gitbook_533">
                     
                         <h1 id="-gatewayworker-lib-gateway-binduid">\GatewayWorker\Lib\Gateway::bindUid</h1>
 <h2 id="-">说明:</h2>
@@ -903,6 +903,7 @@
 <p>将client_id与uid绑定，以便通过<code>Gateway::sendToUid($uid)</code>发送数据，通过<code>Gateway::isUidOnline($uid)</code>用户是否在线。</p>
 <p>注意：</p>
 <p>1、uid与client_id是一对多的关系，系统允许一个uid下有多个client_id。</p>
+<p>2、但是一个client_id只能绑定一个uid，如果绑定多次uid，则只有最后一次绑定有效。</p>
 <p>2、如果业务需要一对一的关系，可以通过<code>Gateway::getClientIdByUid($uid)</code>获得某uid已经绑定的所有client_id，然后调用<code>closeClient($client_id)</code>踢掉之前的client_id。</p>
 <p>3、client_id下线（连接断开）时会自动执行解绑，开发者无需调用Gateway::unbindUid解绑。</p>
 <p>4、如果某个uid对应的所有client_id都下线了，则调用<code>Gateway::isUidOnline($uid)</code>将返回0，即uid不在线。</p>

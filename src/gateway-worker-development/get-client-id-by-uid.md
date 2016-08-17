@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::getClientIdByUid
+# Gateway::getClientIdByUid
 
 ## 说明:
 ```php

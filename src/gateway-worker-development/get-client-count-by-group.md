@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::getClientCountByGroup
+# Gateway::getClientCountByGroup
 
 ## 说明:
 ```php

@@ -1,11 +1,11 @@
-# \GatewayWorker\Lib\Gateway::getClientInfoByGroup
+# Gateway::getAllClientSessions
 
 ## 说明:
 ```php
-array Gateway::getClientInfoByGroup(mixed $group);
+array Gateway::getAllClientSessions(void);
 ```
 
-获取某个分组所有在线client_id信息。
+获取当前所有在线client_id信息。
 
 
 ## 返回值
@@ -19,6 +19,12 @@ array(
 )
 ```
 
+## 更新日志
+| 版本 | 说明 |
+| -- | -- |
+| 2.0.6 | 接口名为getALLClientInfo |
+| 2.0.7 | 接口getALLClientInfo更名为getAllClientSessions |
+
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;
@@ -28,11 +34,8 @@ class Events
     ...
     public onMessage($client_id, $message)
     {
-        $group = 'room-1';
         $_SESSION['name'] = $message['name'];
-        $_SESSION['sex'] = $message['sex'];
-        Gateway::joinGroup($client_id, $group);
-        var_export(Gateway::getClientInfoByGroup($group));
+        var_export(Gateway::getAllClientSessions());
     }
     ...
 }
@@ -42,7 +45,8 @@ class Events
 打印出的数据类似如下：
 ```php
 array(
-    '7f00000108fc00000008' => array('name'=>'Tom', 'sex'=>1),
-    '7f00000108fc00000009' => array('name'=>'Joan', 'sex'=>0),
+    '7f00000108fc00000008' => array('name'=>'Tom'),
+    '7f00000108fc00000009' => array('name'=>'Joan'),
 )
 ```
+

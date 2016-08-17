@@ -24,6 +24,9 @@ mixed Gateway::getSession(string $client_id);
 
 3、如果对应的client_id在线并设置了session，则正常返回一个数组
 
+## 注意
+```Gateway::onClose```回调里无法使用```Gateway::getSession```来获得当前用户的session数据，但是仍然可以使用```$_SESSION```变量获得。
+
 ## 范例
 ```php
 use \GatewayWorker\Lib\Gateway;

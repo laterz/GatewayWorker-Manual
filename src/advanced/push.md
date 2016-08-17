@@ -8,13 +8,16 @@
 
 https://github.com/walkor/GatewayClient
 
+
 GatewayWorker1.0请使用[1.0版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/v1.0)
 
-GatewayWorker版本大于2.0.0小于 2.0.4请使用[2.0.4版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.4)
+GatewayWorker2.0.1-2.0.4请使用[2.0.4版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.4)
 
-GatewayWorker2.0.5及以上版本请使用[2.0.5版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.5)
+GatewayWorker2.0.5-2.0.6版本请使用[2.0.6版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/2.0.6)
 
-查看GatewayWorker版本请[点击这里](/gatewaydoc/faq/get-gateway-version.html)
+GatewayWorker2.0.7及以上版本请使用 [2.0.7版本的GatewayClient](https://github.com/walkor/GatewayClient/releases/tag/v2.0.7)
+
+查看GatewayWorker版本方法请点击[点击这里](/gatewaydoc/faq/get-gateway-version.html)
 
 **注意：**
 

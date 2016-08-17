@@ -1,5 +1,5 @@
 # 工作原理
-1、Register、Gateway、Worker进程同时启动
+1、Register、Gateway、Worker进程启动
 
 2、Gateway、Worker进程启动后向Register服务进程发起长连接注册自己
 
@@ -7,11 +7,11 @@
 
 4、Register服务收到Worker的注册后，把内存中所有的Gateway的通讯地址广播给Worker
 
-5、Worker进程得到所有的Gateway内部通讯地址后尝试连接
+5、Worker进程得到所有的Gateway内部通讯地址后尝试连接Gateway
 
 6、如果运行过程中有新的Gateway服务注册到Register（一般是分布式部署加机器），则将新的Gateway内部通讯地址列表将广播给所有Worker，Worker收到后建立连接
 
-7、如果有Gateway下线，则Register服务会收到通知，会将对应的内部通讯地址删除，然后广播新的内部通讯地址给所有Worker，Worker不再连接下线的Gateway
+7、如果有Gateway下线，则Register服务会收到通知，会将对应的内部通讯地址删除，然后广播新的内部通讯地址列表给所有Worker，Worker不再连接下线的Gateway
 
 8、至此Gateway与Worker通过Register已经建立起长连接
 

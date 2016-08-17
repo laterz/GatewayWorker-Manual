@@ -5,7 +5,9 @@
 void Events::onClose(string $client_id);
 ```
 
-客户端与Gateway的连接断开时触发。不管是客户端主动断开还是服务端主动closeClient，都会触发这个回调。一般在这里做一些数据清理工作。
+客户端与Gateway的连接断开时触发。不管是客户端主动断开还是服务端主动断开，都会触发这个回调。一般在这里做一些数据清理工作。
+
+注意：onClose回调里无法使用```Gateway::getSession```来获得当前用户的session数据，但是仍然可以使用```$_SESSION```变量获得。
 
 ## 参数
 ``` $client_id ```
@@ -32,7 +34,7 @@ class Events
     public static function onClose($client_id)
     {
        // 广播 xxx logout
-       GateWay::sendToAll("client[$client_id] logout\n"));
+       GateWay::sendToAll("client[$client_id] logout\n");
     }
 
     ...

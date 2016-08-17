@@ -1,10 +1,17 @@
 # 入门指引
 
+## 重要的事情说三遍
+开发者只需要关注 Applications/项目/Events.php一个文件即可。<br>
+开发者只需要关注 Applications/项目/Events.php一个文件即可。<br>
+开发者只需要关注 Applications/项目/Events.php一个文件即可。
+
+如果想了解更多，可以看下面。
+
 ## 目录结构
 <pre>
 .
 ├── Applications // 这里是所有开发者应用项目
-│   └── YourApp  // 其中一个应用目录，目录名可以自定义
+│   └── YourApp  // 其中一个项目目录，目录名可以自定义
 │       ├── Events.php // 开发者只需要关注这个文件
 │       ├── start_gateway.php // gateway进程启动脚本
 │       ├── start_businessworker.php // businessWorker进程启动脚本
@@ -29,9 +36,7 @@
 
 ## 说明
 
-开发者只需要关注Applications/YourApp目录的文件即可（YourApp是项目名，可自定义），其它目录如GatewayWorker和Workerman目录为框架目录，开发者不要改动，这样方便后续框架升级。
-
-一般来说开发者只需要关注Applications/YourApp/Events.php。因为所有业务代码都在这里开始的。
+一般来说开发者只需要关注Applications/YourApp/Events.php。因为所有业务代码都在这里开始的。其它目录如GatewayWorker和Workerman目录为框架目录，开发者不要改动，也不用去理解。
 
 其它start_gateway.php start_businessworker.php start_register.php分别是进程启动脚本，开发者一般不需要改动这三个文件。三个脚本统一由根目录的start.php启动。
 
@@ -83,11 +88,11 @@ class Events
 
 Events.php中定义5个事件回调方法，
 
-  * onWorkerStart businessWorker进程启动事件
-  * onConnect 连接事件
-  * onMessage 消息事件
-  * onClose   连接断开事件
-  * onWorkerStop businessWorker进程退出事件
+  * onWorkerStart businessWorker进程启动事件（一般用不到）
+  * onConnect 连接事件(比较少用到)
+  * onMessage 消息事件(必用)
+  * onClose   连接断开事件(比较常用到)
+  * onWorkerStop businessWorker进程退出事件（几乎用不到）
 
 
 ```5个回调接口说明参见 Events类的回调接口 一节```
@@ -114,7 +119,6 @@ class Events
 ```
 
 ## start_gateway.php
-
 start_gateway.php为gateway进程启动脚本，主要定义了客户端连接的端口号、协议等信息，具体参见 Gateway类的使用一节。
 
 ## start_businessworker.php

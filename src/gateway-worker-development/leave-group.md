@@ -1,11 +1,11 @@
-# \GatewayWorker\Lib\Gateway::leaveGroup
+# Gateway::leaveGroup
 
 ## 说明:
 ```php
 void Gateway::leaveGroup(string $client_id, mixed $group);
 ```
 
-将client_id从某个组中删除，不再接收该分组广播的数据。
+将client_id从某个组中删除，不再接收该分组广播(```Gateway::sendToGroup```)发送的数据。
 
 注意：当client_id下线（连接断开）时，client_id会自动从它所属的各个分组中删除，也就是说无需在onClose回调中调用Gateway::leaveGroup
 

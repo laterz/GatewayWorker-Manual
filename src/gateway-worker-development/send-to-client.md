@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::sendToClient
+# Gateway::sendToClient
 
 ## 说明:
 ```php

@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::isUidOnline
+# Gateway::isUidOnline
 
 ## 说明:
 ```php

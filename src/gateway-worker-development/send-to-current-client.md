@@ -1,4 +1,4 @@
-# \GatewayWorker\Lib\Gateway::sendToCurrentClient
+# Gateway::sendToCurrentClient
 
 ## 说明:
 ```php

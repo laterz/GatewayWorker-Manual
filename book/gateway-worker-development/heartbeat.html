@@ -32,7 +32,7 @@
 
 
         
-    <div class="book"  data-level="8.10" data-basepath=".." data-revision="1462419379970">
+    <div class="book"  data-level="8.10" data-basepath=".." data-revision="1471420417599">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -269,7 +269,7 @@
         <li class="chapter " data-level="8.5" data-path="gateway-worker-development/event-functions.html">
             
             <a href="../gateway-worker-development/event-functions.html">
-                <i class="fa fa-check"></i> <b>8.5.</b> Events类的回调接口
+                <i class="fa fa-check"></i> <b>8.5.</b> Events类的回调属性
             </a>
             
             
@@ -471,10 +471,10 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6.16" data-path="gateway-worker-development/get-client-info-by-group.html">
+        <li class="chapter " data-level="8.6.16" data-path="gateway-worker-development/get-client-sessions-by-group.html">
             
-            <a href="../gateway-worker-development/get-client-info-by-group.html">
-                <i class="fa fa-check"></i> <b>8.6.16.</b> getClientInfoByGroup
+            <a href="../gateway-worker-development/get-client-sessions-by-group.html">
+                <i class="fa fa-check"></i> <b>8.6.16.</b> getClientSessionsByGroup
             </a>
             
             
@@ -489,10 +489,10 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6.18" data-path="gateway-worker-development/get-online-status.html">
+        <li class="chapter " data-level="8.6.18" data-path="gateway-worker-development/get-all-client-sessions.html">
             
-            <a href="../gateway-worker-development/get-online-status.html">
-                <i class="fa fa-check"></i> <b>8.6.18.</b> getALLClientInfo
+            <a href="../gateway-worker-development/get-all-client-sessions.html">
+                <i class="fa fa-check"></i> <b>8.6.18.</b> getAllClientSessions
             </a>
             
             
@@ -803,7 +803,7 @@
     
         <a href="../gateway-worker-development/register.html" title="Register类的使用" class="chapter  " data-progress="8.4" style="left: 32.8125%;"></a>
     
-        <a href="../gateway-worker-development/event-functions.html" title="Events类的回调接口" class="chapter  " data-progress="8.5" style="left: 34.375%;"></a>
+        <a href="../gateway-worker-development/event-functions.html" title="Events类的回调属性" class="chapter  " data-progress="8.5" style="left: 34.375%;"></a>
     
         <a href="../gateway-worker-development/onworkerstart.html" title="onWorkerStart" class="chapter  " data-progress="8.5.1" style="left: 35.9375%;"></a>
     
@@ -847,11 +847,11 @@
     
         <a href="../gateway-worker-development/get-client-count-by-group.html" title="getClientCountByGroup" class="chapter  " data-progress="8.6.15" style="left: 67.1875%;"></a>
     
-        <a href="../gateway-worker-development/get-client-info-by-group.html" title="getClientInfoByGroup" class="chapter  " data-progress="8.6.16" style="left: 68.75%;"></a>
+        <a href="../gateway-worker-development/get-client-sessions-by-group.html" title="getClientSessionsByGroup" class="chapter  " data-progress="8.6.16" style="left: 68.75%;"></a>
     
         <a href="../gateway-worker-development/get-all-client-count.html" title="getAllClientCount" class="chapter  " data-progress="8.6.17" style="left: 70.3125%;"></a>
     
-        <a href="../gateway-worker-development/get-online-status.html" title="getALLClientInfo" class="chapter  " data-progress="8.6.18" style="left: 71.875%;"></a>
+        <a href="../gateway-worker-development/get-all-client-sessions.html" title="getAllClientSessions" class="chapter  " data-progress="8.6.18" style="left: 71.875%;"></a>
     
         <a href="../gateway-worker-development/set-session.html" title="setSession" class="chapter  " data-progress="8.6.19" style="left: 73.4375%;"></a>
     
@@ -894,7 +894,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_22">
+                    <section class="normal" id="section-gitbook_529">
                     
                         <h1 id="-">服务端到客户端的心跳检测</h1>
 <p>GatewayWorker支持<strong>服务端</strong>向<strong>客户端</strong>定时发送心跳包检测连接是否存活</p>
@@ -927,8 +927,7 @@
 <p><code>Gateway::$pingData</code></p>
 <p>要发送的心跳请求数据，心跳数据是任意的，只要客户端能识别即可。</p>
 <h3 id="-">注意:</h3>
-<p>所有连接共享同一个心跳周期（<code>Gateway::$pingInterval</code>秒），心跳周期结束那一刻，服务端会检查所有客户端连接，如果连接在该心跳周期内有向服务端发送数据（包括客户端回应给服务端的心跳包），则不发送心跳。如果心跳周期内客户端没发过来数据，则发送心跳给客户端。服务端紧接着进入下一个心跳周期。</p>
-<p>如果客户端有回应心跳包，那么根据这个心跳周期机制，服务端会每两个心跳周期（<code>2* Gateway::$pingInterval</code>秒）才发送一次心跳。因为服务端会收到客户端心跳响应包，收到心跳响应包的心跳周期将不会发送心跳，下一个心跳周期才会发送心跳。</p>
+<p>如果客户端有发来数据，那么证明客户端存活，服务端会省略一个心跳，下个心跳大约<code>1.5*$gateway-&gt;pingInterval</code>秒后发送。</p>
 <h2 id="-1">技巧1</h2>
 <p>如果客户端有定时向服务端发送心跳检测，则服务端可以不必向客户端发送心跳检测，即利用客户端主动发送的数据判断客户端是否存活。这时我们需要设置<code>pingData=&#39;&#39;</code>,例如如下配置</p>
 <pre><code class="lang-php"><span class="hljs-variable">$gateway</span> = <span class="hljs-keyword">new</span> Gateway(<span class="hljs-string">"Websocket://0.0.0.0:8585"</span>);

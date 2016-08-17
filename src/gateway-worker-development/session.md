@@ -17,3 +17,28 @@ GatewayWorker中的超全局数组```$_SESSION```和PHP自身的```$_SESSION```�
 
 在WorkerMan的Gateway/Worker模型中，每个客户端的```$_SESSION```数据是存储在Gateway进程内存中的，每次Gateway进程转发消息给BusibuessWorker进程时，都会顺便携带上对应客户端的```$_SESSION```数据给BusibuessWorker进程，这时BusibuessWorker进程就能使用```$_SESSION```了。而当```$_SESSION```数据有更改时，BusibuessWorker会将新的```$_SESSION```数据传递给Gateway进程进行保存。
 
+## 示例
+```php
+class Events
+{
+    public static function onMessage($client_id, $data)
+    {
+        // data={"type":"login", "uid":"666"}
+        $data = json_decode($data, true);
+        // 如果没有$_SESSION['uid']说明客户端没有登录
+        if(!isset($_SESSION['uid']))
+        {
+            // 消息类型不是登录视为非法请求，关闭连接
+            if($data['type'] !== 'login')
+            {
+                return Gateway::closeClient($client_id);
+            }
+            // 设置session，标记该客户端已经登录
+            $_SESSION['uid'] = $data['uid'];
+        }
+    }
+
+}
+```
+
+

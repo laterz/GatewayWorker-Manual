@@ -12,6 +12,8 @@ void Gateway::bindUid(string $client_id, mixed $uid);
 
 1、uid与client_id是一对多的关系，系统允许一个uid下有多个client_id。
 
+2、但是一个client_id只能绑定一个uid，如果绑定多次uid，则只有最后一次绑定有效。
+
 2、如果业务需要一对一的关系，可以通过```Gateway::getClientIdByUid($uid)```获得某uid已经绑定的所有client_id，然后调用```closeClient($client_id)```踢掉之前的client_id。
 
 3、client_id下线（连接断开）时会自动执行解绑，开发者无需调用Gateway::unbindUid解绑。
