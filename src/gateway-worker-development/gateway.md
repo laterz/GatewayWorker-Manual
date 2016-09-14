@@ -2,6 +2,8 @@
 
 文件位置：GatewayWorker/Gateway.php
 
+Gateway类用于初始化Gateway进程。Gateway进程是暴露给客户端的让其连接的进程。所有客户端的请求都是由Gateway接收然后分发给Worker处理，同样Worker也会将要发给客户端的响应通过Gateway转发出去。
+
 Gateway类是基于基础的Worker开发的。可以给Gateway对象的onWorkerStart、onWorkerStop、onConnect、onClose设置回调函数，但是无法给设置onMessage回调。Gateway的onMessage行为固定为将客户端数据转发给Worker。
 
 ## Gateway类可以定制的内容

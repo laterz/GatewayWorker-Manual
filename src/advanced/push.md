@@ -27,6 +27,8 @@ GatewayWorker2.0.7及以上版本请使用 [2.0.7版本的GatewayClient](https:/
 
 注意：通过GatewayClient发送的数据不会经过Event.php，而是直接经由Gateway进程转发给客户端。
 
+注意：GatewayClient无法接收客户端发来的数据.
+
  **客户端使用示例**
  ```php
 require_once '/your/path/GatewayClient/Gateway.php';
