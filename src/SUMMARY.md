@@ -64,4 +64,5 @@
    * [查看GatewayWorker版本](faq/get-gateway-version.md)
    * [如何获得客户端ip](faq/get-ip.md)
    * [多协议如何区分端口](faq/get-gateway-port.md)
+   * [关闭未认证连接](faq/close-unauthed-connections.md)
 

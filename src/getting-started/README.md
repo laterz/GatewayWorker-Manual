@@ -121,7 +121,7 @@ class Events
 ## start_gateway.php
 start_gateway.php为gateway进程启动脚本，主要定义了客户端连接的端口号、协议等信息，具体参见 Gateway类的使用一节。
 
-客户端连接的就是start_gateway.php中初始化的Gateway端口（```注意客户端不要去连Register服务端口```）。
+客户端连接的就是start_gateway.php中初始化的Gateway端口。
 
 ## start_businessworker.php
 start_businessworker.php为businessWorker进程启动脚本，也即是业务处理进程，具体参见 BusinessWorker类的使用一节。
