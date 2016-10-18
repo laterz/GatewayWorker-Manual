@@ -7,6 +7,8 @@ void Gateway::bindUid(string $client_id, mixed $uid);
 
 将client_id与uid绑定，以便通过```Gateway::sendToUid($uid)```发送数据，通过```Gateway::isUidOnline($uid)```用户是否在线。
 
+uid解释：这里uid泛指用户id或者设备id，用来唯一确定一个客户端用户或者设备。
+
 
 注意：
 

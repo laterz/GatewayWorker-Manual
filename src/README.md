@@ -13,36 +13,23 @@ Workerman可以看做是一个纯粹的socket类库，可以开发几乎所有�
 
 因为绝大多数开发者的目标是基于Workerman开发TCP长连接应用，而长连接应用服务端有很多共同之处，例如它们有相同的进程模型以及单发、群发、广播等接口需求。所以才有了GatewayWorker框架，GatewayWorker是基于Workerman开发的一个TCP长连接框架，实现了单发、群送、广播等长连接必用的接口，并且内置了MySql类库。GatewayWorker框架实现了Gateway Worker进程模型，天然支持分布式部署，扩容缩容非常方便，能够应对海量并发连接。可以说GatewayWorker是基于Workerman实现的一个更完善的专门用于实现TCP长连接的项目框架。
 
+## 用GatewayWorker还是Workerman？
+如果你的项目是长连接并且需要客户端与客户端之间通讯，建议使用GatewayWorker。<br>
+短连接或者不需要客户端与客户端之间通讯的项目建议使用Workerman。<br>
+GatewayWorker不支持UDP监听，所以UDP服务请选择Workerman。<br>
+
 ## GatewayWorker 源码地址
 
-Linux版本：https://github.com/walkor/GatewayWorker
+https://github.com/walkor/GatewayWorker
 
-Windows版本：https://github.com/walkor/GatewayWorker-for-win
+## 安装方法
 
+GatewayWorker需要使用[composer](http://docs.phpcomposer.com/)安装，如果没有安装请自行下载安装。
 
-## Applications\YourApp测试方法
+命令行进入项目，运行 ``` composer require workerman/gateway-worker``` 下载安装。
 
-##启动（Linux版本）
-以debug方式启动
+通过 ```require_once '/your/path/vendor/autoload.php';``` 自动加载类文件。
 
-```php start.php start```
-
-或者以daemon方式启动
-
-```php start.php start -d```
-
-## 测试
-使用telnet命令测试（不要使用windows自带的telnet测试）
-```shell
- telnet 127.0.0.1 8282
-Trying 127.0.0.1...
-Connected to 127.0.0.1.
-Escape character is '^]'.
-Hello 3
-3 login
-haha
-3 said haha
-```
 
 ## 使用GatewayWorker开发的项目
 
