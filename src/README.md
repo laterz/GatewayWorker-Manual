@@ -24,11 +24,11 @@ https://github.com/walkor/GatewayWorker
 
 ## 安装方法
 
-GatewayWorker需要使用[composer](http://docs.phpcomposer.com/)安装，如果没有安装请自行下载安装。
+GatewayWorker需要使用[composer](http://docs.phpcomposer.com/)安装
 
-命令行进入项目，运行 ``` composer require workerman/gateway-worker``` 下载安装。
+命令行运行 ``` composer require workerman/gateway-worker``` 下载GatewayWorker。
 
-通过 ```require_once '/your/path/vendor/autoload.php';``` 自动加载类文件。
+通过 ```require_once '/your/path/vendor/autoload.php';``` 自动加载类文件使用GatewayWorker。
 
 
 ## 使用GatewayWorker开发的项目

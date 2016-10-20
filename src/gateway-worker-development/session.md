@@ -12,6 +12,7 @@ GatewayWorker中的超全局数组```$_SESSION```和PHP自身的```$_SESSION```�
 * ```$_SESSION```中无法保存资源类型的数据
 * 当客户端连接断开后，对应的客户端```$_SESSION```将会清除
 * GatewayWorker中的```$_SESSION```与WebServer(PHP-FPM)中的```$_SESSION```无法互通
+* 定时器中不要直接使用```$_SESSION```变量，因为定时器运行那一刻无法确定```$_SESSION```变量里存储的值属于哪个client_id。如果定时器里面需要获得session，可以使用```Gateway::getSession($client_id)```获取
 
 ### ```$_SESSION```实现原理
 
