@@ -13,25 +13,13 @@
 ├── Applications // 这里是所有开发者应用项目
 │   └── YourApp  // 其中一个项目目录，目录名可以自定义
 │       ├── Events.php // 开发者只需要关注这个文件
-│       ├── start_gateway.php // gateway进程启动脚本
+│       ├── start_gateway.php // gateway进程启动脚本，包括端口号等设置
 │       ├── start_businessworker.php // businessWorker进程启动脚本
 │       └── start_register.php // 注册服务启动脚本
 │
-├── GatewayWorker // GatewayWorker框架代码
-│   ├── BusinessWorker.php  // BusinessWorker进程实现
-│   ├── Gateway.php         // Gateway进程实现
-│   ├── Register.php        // 注册服务进程实现
-│   ├── Lib
-│   │   ├── Context.php     // Gateway与BusinessWorker通信上下文
-│   │   ├── DbConnection.php// 一个数据库连接类
-│   │   ├── Db.php          // 数据库连接管理类
-│   │   └── Gateway.php     // Gateway通信接口类，给Events.php调用
-│   └──── Protocols
-│         └── GatewayProtocol.php // Gateway与BusinessWorker通信协议
+├── start.php // 全局启动脚本，此脚本会依次加载Applications/项目/start_*.php启动脚本
 │
-├── Workerman // workerman内核目录
-│
-└── start.php // 全局启动脚本
+└── vendor    // GatewayWorker框架和Workerman框架源码目录，此目录开发者不用关心
 </pre>
 
 ## 说明

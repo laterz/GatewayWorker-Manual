@@ -18,18 +18,25 @@ Workerman可以看做是一个纯粹的socket类库，可以开发几乎所有�
 短连接或者不需要客户端与客户端之间通讯的项目建议使用Workerman。<br>
 GatewayWorker不支持UDP监听，所以UDP服务请选择Workerman。<br>
 
-## GatewayWorker 源码地址
+
+## Linux系统快速开始（从一个精简的聊天demo开始）
+1、[下载demo](http://www.workerman.net/download/GatewayWorker.zip)
+
+2、命令行运行 ```unzip GatewayWorker.zip``` 解压缩GatewayWorker.zip
+
+3、命令行运行 ```cd GatewayWorker``` 进入GatewayWorker目录
+
+4、命令行运行 ```php start.php start``` 启动GatewayWorker
+
+5、**新开几个**命令行窗口运行 ```telnet 127.0.0.1 8282```，输入任意字符即可聊天（非本机测试请将127.0.0.1替换成实际ip）。
+
+**注意：**如果telnet超时请检查服务器防火墙(iptables)
+
+
+
+## GatewayWorker 源码地址（只包含GatewayWorker内核）
 
 https://github.com/walkor/GatewayWorker
-
-## 安装方法
-
-GatewayWorker需要使用[composer](http://docs.phpcomposer.com/)安装
-
-命令行运行 ``` composer require workerman/gateway-worker``` 下载GatewayWorker。
-
-通过 ```require_once '/your/path/vendor/autoload.php';``` 自动加载类文件使用GatewayWorker。
-
 
 ## 使用GatewayWorker开发的项目
 

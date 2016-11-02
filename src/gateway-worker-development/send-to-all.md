@@ -21,7 +21,7 @@ void Gateway::sendToAll(string $send_data [, array $client_id_array = null [, ar
 
 * ```$exclude_client_id```
 
-排除的client_id，$exclude_client_id指定的client_id将被忽略，不会收到消息
+client_id组成的数组。```$exclude_client_id```数组中指定的client_id将被排除在外，不会收到本次发的消息
 
 * ```$raw```
 
