@@ -32,6 +32,7 @@
        * [bindUid](gateway-worker-development/bind-uid.md)
        * [isUidOnline](gateway-worker-development/is-uid-online.md)
        * [getClientIdByUid](gateway-worker-development/get-client-id-by-uid.md)
+       * [getUidByClientId](gateway-worker-development/get-uid-by-client-id.md)
        * [unbindUid](gateway-worker-development/unbind-uid.md)
        * [sendToUid](gateway-worker-development/send-to-uid.md)
        * [joinGroup](gateway-worker-development/join-group.md)
