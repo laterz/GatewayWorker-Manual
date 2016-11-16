@@ -32,10 +32,26 @@ GatewayWorker不支持UDP监听，所以UDP服务请选择Workerman。<br>
 
 **注意：**如果telnet超时请检查服务器防火墙(iptables)
 
+## Windows系统快速开始（从一个精简的聊天demo开始）
+1、[下载demo](http://www.workerman.net/download/GatewayWorker-for-win.zip)
+
+2、解压到任意位置
+
+3、进入GatewayWorker目录
+
+4、双击start_for_win.bat启动。（如果出现错误请参考[这里](http://www.workerman.net/windows)设置php环境变量）
+
+5、**新开几个**cmd命令行窗口运行 ```telnet 127.0.0.1 8282```，输入任意字符即可聊天（非本机测试请将127.0.0.1替换成实际ip，）。
+
+**注意：**<br>
+windows系统telnet可能需要安装，安装方法可以baidu下<br>
+windows系统telnet是逐字符发送的，无法发送整句话请不要奇怪<br>
+如果telnet超时请检查服务器防火墙<br>
 
 
-## GatewayWorker 源码地址（只包含GatewayWorker内核）
 
+## GatewayWorker 源码地址
+只包含GatewayWorker内核<br>
 https://github.com/walkor/GatewayWorker
 
 ## 使用GatewayWorker开发的项目
