@@ -1,7 +1,7 @@
 # gateway worker 分离部署
 
 ## 什么是Gateway Worker分离部署
-GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorker进程负责业务处理，Gateway与BusinessWorker之间使用TCP长连接通讯。当系统出现高负载时，一般都是业务进程BusinessWorker出现瓶颈。我们可以把Gateway BusinessWorker分开部署在不同的服务器上，单独增加BusinessWorker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。
+GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorker进程负责业务处理，Gateway与BusinessWorker之间使用TCP长连接通讯。我们可以把Gateway BusinessWorker分开部署在不同的服务器上，当业务进程BusinessWorker出现瓶颈时，单独增加BusinessWorker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。
 
 # 部署示例
 
@@ -9,9 +9,11 @@ GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorke
 
 
 ## gateway worker 分离部署扩容步骤
-1、首先将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）。另外集群统一使用192.168.0.1上的Register服务，以便集群内的Gateway和BusinessWorker建立起连接。
+1、由于一个集群只需要一台服务器运行Register服务，这里选择192.168.0.1，端口是1236（端口为start_register.php中监听的端口），其它服务器中start_register.php中的代码可以注释掉。
 
-2、由于192.168.0.1这台机器只部署Gateway进程，所以将该服务器上的初始化BusinessWorker示例的地方注释或者删掉，避免运行BusinessWorker进程，例如
+2、将进程切分，将Gateway进程部署在一台机器上(假设内网ip为192.168.0.1)，这台服务器也运行着集群的Register服务，而BusinessWorker部署在另外两台机器上（内网ip为192.168.0.2/3）。
+
+3、由于192.168.0.1这台机器只部署Gateway进程和Register进程，所以将该服务器上初始化BusinessWorker实例的地方注释或者删掉，避免运行BusinessWorker进程，例如
 
 这里打开文件Applications/Todpole/start_businessworker.php，注释掉bussinessWorker初始化
 
@@ -24,7 +26,7 @@ GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorke
 ...
 ```
 
-3、配置Gateway服务器(192.168.0.1)上的Gateway实例的```lanIp=192.168.0.1```与本机ip一致，配置registerAddress为'192.168.0.1:1236',Gateway服务器的初始化文件最终类似下面配置
+4、配置Gateway服务器(192.168.0.1)上start_gateway.php中的```lanIp=192.168.0.1```与本机ip一致，配置registerAddress为```192.168.0.1:1236```，start_gateway.php文件最终类似下面配置
 
 文件Applications/Todpole/start_gateway.php
 ```php
@@ -47,7 +49,7 @@ $gateway->pingData = '{"type":"ping"}';
 ...
 ```
 
-3、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台服务器上的Gateway进程初始化文件注释掉或者删掉。
+5、由于192.168.0.2/3 两台服务器只部署BusinessWorker进程，所以将这两台服务器上的Gateway进程初始化文件注释掉或者删掉。
 
 这里打开Applications/Todpole/start_gateway.php，注释掉gateway初始化部分
 
@@ -68,11 +70,11 @@ use \GatewayWorker\Gateway;
 
 ```
 
-4、打开192.168.0.2/3两台服务器的start_businessworker.php，配置registerAddress为 192.168.0.1:1236
+6、打开192.168.0.2/3两台服务器的start_businessworker.php，配置registerAddress为 192.168.0.1:1236
 
-5、逐台启动
+7、逐台启动
 
-*至此，WorkerMan分布式部署完毕。*
+*至此，GatewayWorker分布式部署完毕。*
 
 ## 一些问题及解答
 

@@ -24,7 +24,7 @@
 
 ## 说明
 
-一般来说开发者只需要关注Applications/YourApp/Events.php。因为所有业务代码都在这里开始的。其它目录如GatewayWorker和Workerman目录为框架目录，开发者不要改动，也不用去理解。
+一般来说开发者只需要关注Applications/YourApp/Events.php。因为所有业务代码都在这里开始的。vendor目录为框架目录，开发者不要改动，也不用去理解。
 
 其它start_gateway.php start_businessworker.php start_register.php分别是进程启动脚本，开发者一般不需要改动这三个文件。三个脚本统一由根目录的start.php启动。
 
@@ -112,7 +112,7 @@ start_gateway.php为gateway进程启动脚本，主要定义了客户端连接�
 客户端连接的就是start_gateway.php中初始化的Gateway端口。
 
 ## start_businessworker.php
-start_businessworker.php为businessWorker进程启动脚本，也即是业务处理进程，具体参见 BusinessWorker类的使用一节。
+start_businessworker.php为businessWorker进程启动脚本，也即是调用Events.php的业务处理进程，具体参见 BusinessWorker类的使用一节。
 
 ## start_register.php
 start_register.php为注册服务启动脚本，用于协调GatewayWorker集群内部Gateway与Worker的通信，参见Register类使用一节。
