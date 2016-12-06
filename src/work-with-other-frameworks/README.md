@@ -4,6 +4,7 @@
 <br>
 ![](http://www.workerman.net/img/doc/work-with-other-mvc-framework.png)
 
+
 <br>
 ## 总体原则:
 
@@ -117,6 +118,10 @@ Gateway::sendToUid($uid, $message);
 // 向任意群组的网站页面发送数据
 Gateway::sendToGroup($group, $message);
 ```
+
+## 注意
+以上仅是mvc框架与GatewayWorker官方推荐的结合方式，并不是强制使用此方式，开发者可以自由变化选择结合方式以适应自己的业务需求。
+当然也可以采用客户端与GatewayWorker直接双向通讯的方式完成业务通讯。
 
 ## 关于GatewayClient
 
