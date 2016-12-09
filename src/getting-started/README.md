@@ -1,11 +1,12 @@
 # 入门指引
 
 ## 重要的事情说三遍
-开发者只需要关注 Applications/项目/Events.php一个文件即可。<br>
-开发者只需要关注 Applications/项目/Events.php一个文件即可。<br>
-开发者只需要关注 Applications/项目/Events.php一个文件即可。
+业务开发只需要关注 Applications/项目/Events.php一个文件即可。<br>
+业务开发只需要关注 Applications/项目/Events.php一个文件即可。<br>
+业务开发只需要关注 Applications/项目/Events.php一个文件即可。<br>
 
-如果想了解更多，可以看下面。
+开放的端口及协议在start_gateway.php中更改。参见[Gateway类的使用](./gateway-worker-development/gateway.html)一章。
+
 
 ## 注意
 1、服务端启动成功，但是无法通讯，请检查服务器防火墙。

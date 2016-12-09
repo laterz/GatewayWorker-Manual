@@ -6,6 +6,42 @@ Gateway类用于初始化Gateway进程。Gateway进程是暴露给客户端的�
 
 Gateway类是基于基础的Worker开发的。可以给Gateway对象的onWorkerStart、onWorkerStop、onConnect、onClose设置回调函数，但是无法给设置onMessage回调。Gateway的onMessage行为固定为将客户端数据转发给BusinessWorker。
 
+## 初始化
+初始化Gateway进程类似下面的代码
+
+```php
+$gateway = new Gateway('protocol://ip:port');
+```
+
+其中参数各参数含义入下：
+
+**protocol：**
+
+为应用层协议，目前支持的协议有<br>
+1、[websocket协议](http://doc3.workerman.net/appendices/about-websocket.html)<br>
+2、[text协议](http://doc3.workerman.net/appendices/about-text.html)<br>
+3、[Frame协议](http://doc3.workerman.net/appendices/about-frame.html)<br>
+4、[自定义通讯协议](http://doc3.workerman.net/protocols/how-protocols.html)<br>
+5、[tcp](http://baike.baidu.com/item/TCP/33012)，直接裸tcp，不推荐，见[通讯协议作用](http://doc3.workerman.net/protocols/why-protocols.html)。
+
+
+``` 注意 ```:GatewayWorker不支持监听Http协议和ws协议。但是可以在业务中以客户端的形式通过http协议(比如curl)或者ws协议(配合[AsyncTcpConnection](http://doc3.workerman.net/appendices/about-ws.html))访问远程服务器。
+
+**ip：**
+
+1、如果写0.0.0.0代表监听本机所有网卡，也就是内网、外网、本机都可以访问到
+
+2、如果是127.0.0.1，代表只能本机通过127.0.0.1访问，外网和内网都访问不到
+
+3、如果是内网ip例如:192.168.10.11，代表只能通过192.168.10.11访问，也就是只能内网访问，本机127.0.0.1也访问不了（如果监听的ip不属于本机则会报错）
+
+4、如果是外网ip例如110.110.110.110，代表只能通过外网ip 110.110.110.110访问，内网和本机127.0.0.1都访问不了(如果监听的ip不属于本机则会报错)
+
+**port：**
+
+端口不能大于65535，请确认端口没有被其它程序占用，否则启动会报错。如果端口小于1024，需要root权限运行GatewayWorker才能有权限监听，否则报错没有权限。
+
+
 ## Gateway类可以定制的内容
 
 1、 协议
