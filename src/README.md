@@ -1,5 +1,5 @@
-# GatewayWorker2.0 手册
-本手册适用于最新版本GatewayWorker2.0(发布时间2015-11-11)。
+# GatewayWorker2.x 3.x 手册
+本手册适用于GatewayWorker2.x版本以及3.x版本。
 
 ## GatewayWorker 手册
 GatewayWorker基于Workerman开发的一个项目框架，用于快速开发TCP长连接应用，例如app推送服务端、即时IM服务端、游戏服务端、物联网、智能家居等等
