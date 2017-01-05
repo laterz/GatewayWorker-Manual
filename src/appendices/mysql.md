@@ -8,18 +8,30 @@
 
 命令行运行```php -m```会列出所有php cli已安装的扩展，如果没有pdo 或者 pdo_mysql，请自行安装。
 
-centos系统
+**centos系统**
 ```
 yum install php-pdo
 yum install php-mysql
 ```
+如果找不到包名，请尝试用```yum search php mysql```查找
 
-ubuntu/debian系统
+**ubuntu/debian系统**
+
+PHP5.x
 ```
 apt-get install php5-mysql
 ```
 
-如果以上方法无法安装，请参考[workerman手册-附录-扩展安装](http://doc3.workerman.net/appendices/install-extension.html)一节安装。
+PHP7.x
+```
+apt-get install php7.0-mysql
+```
+
+如果找不到包名，请尝试用```apt-cache search php mysql```查找
+
+**以上方法无法安装？**
+
+如果以上方法无法安装，请参考[workerman手册-附录-扩展安装-方法三源码编译安装](http://doc3.workerman.net/appendices/install-extension.html)。
 
 ## 注意
 请在```onXXXX```回调中使用数据库类。在```Worker::runAll();```前初始化数据库单例会导致数据错乱，参看下面例子中错误用法部分和正确用法部分。
@@ -40,7 +52,7 @@ Autoloader::setRootPath(__DIR__);
  * 子进程会继承这个数据库单例(包括其中的数据库链接资源)，
  * 当mysql返回数据时，所有子进程都可以通过这个连接读取返回数据，
  * 导致数据错乱。
- * 同理：其它单例的连接资源(memcache\redis等)也不能在Worker::runAll前初始化。
+ * 同理：其它单例的连接资源(memcache\redis等)也不能在Worker::runAll运行前初始化。
  */
 Db::instance('db1')->select('name,age')->from('users')->where('age>12')->query();
 
@@ -99,6 +111,7 @@ class Db
     );
 }
 ```
+**注意：**上面配置中```Config/Db::$db1```是数据库配置名，获取实例的方法与其对应是```Db::instance('db1')```，而不是```Db::instance('your_db_name')```。
 
 
 2、项目/Event.php
@@ -128,7 +141,7 @@ class Event
             Gateway::sendToClient($client_id, "unknown commend\n");
             return;
         }
-        // 获取用户列表（这里是临时的一个测试数据库）
+        // 注意，这里的db1对应的是Config/Db::$db1 的配置
         $ret = Db::instance('db1')->select('*')->from('users')->where('uid>3')->offset(5)->limit(2)->query();
         // 打印结果
         return Gateway::sendToClient($client_id, var_export($ret, true));
@@ -172,7 +185,9 @@ class Db
 
 ```php
 use \GatewayWorker\Lib\Db;
+// 注意，这里的db1对应的是Config/Db::$db1 的配置
 $db1 = Db::instance('db1');
+// 注意，这里的db2对应的是Config/Db::$db2 的配置
 $db2 = Db::instance('db2');
 
 // 获取所有数据
@@ -227,5 +242,10 @@ $row_count = $db1->query("UPDATE `Persons` SET `sex` = 'F' WHERE ID=1");
 $row_count = $db1->delete('Persons')->where('ID=9')->query();
 // 等价于
 $row_count = $db1->query("DELETE FROM `Persons` WHERE ID=9");
+
+// 事务
+$db1->beginTrans();
+....
+$db1->commitTrans(); // or $db1->rollBackTrans();
 
 ```

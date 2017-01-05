@@ -1,11 +1,11 @@
 # gateway worker 分离部署
 
 ## 什么是Gateway Worker分离部署
-GatewayWorker模式有两组进程，Gateway进程负责网络IO，BusinessWorker进程负责业务处理，Gateway与BusinessWorker之间使用TCP长连接通讯。我们可以把Gateway BusinessWorker分开部署在不同的服务器上，当业务进程BusinessWorker出现瓶颈时，单独增加BusinessWorker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。
+GatewayWorker有三种进程，Gateway进程负责网络IO，BusinessWorker进程负责业务处理，Register进程负责协调Gateway与BusinessWorker之间建立TCP长连接通讯。我们可以把Gateway BusinessWorker Register分开部署在不同的服务器上，当业务进程BusinessWorker出现瓶颈时，单独增加BusinessWorker服务器提升系统负载能力。同理，如果Gateway进程出现瓶颈，则增加Gateway服务器。而Register服务一个集群只需要部署一台服务器，Register服务只有在进程启动的时候协调Gateway与BusinessWorker建立TCP连接，集群运行起来后通讯量极低，不会成为系统瓶颈。
 
 # 部署示例
 
-以Applications/Todpole为例，假如需要部署三台服务器提供高可用服务。瓶颈在BusinessWorker进程，则可使用1台作为gateway服务器，另外两台做BusinessWorker服务器。（如果瓶颈在gateway进程（一般是带宽瓶颈），则可以2台gateway机器，1台BusinessWorker机器，部署方法类似）。
+以Applications/Todpole为例，假如需要部署三台服务器提供高可用服务。瓶颈在BusinessWorker进程，则可使用1台作为gateway服务器，另外两台做BusinessWorker服务器。（如果瓶颈在gateway进程（一般是带宽瓶颈），则可以2台gateway机器，1台BusinessWorker机器，部署方法类似）。Register服务可以部署在任意一台服务器上。
 
 
 ## gateway worker 分离部署扩容步骤
