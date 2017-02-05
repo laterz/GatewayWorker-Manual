@@ -8,12 +8,12 @@
 开放的端口及协议在start_gateway.php中更改。参见[Gateway类的使用](./gateway-worker-development/gateway.html)一章。
 
 
-## 注意
+## ```注意```
 1、服务端启动成功，但是无法通讯，请检查服务器防火墙。
 
-2、客户端与服务端要能保持正常通讯，需要保证客户端与服务端的通讯协议是一致的。比如服务端是websocket协议，客户端也要使用websocket协议来通讯(js里用```ws=new WebSocket('ws://ip:port');```来连接)，而浏览器地址栏(http协议)直接访问websocket服务肯定是不通的。
+2、客户端与服务端要能保持正常通讯，需要保证客户端与服务端的通讯协议是一致的。比如服务端是websocket协议，客户端也要使用websocket协议才能通讯，否则无法通讯。
 
-3、长连接应用切记需要开启应用层心跳(GatewayWorker提供了设置，[参见心跳检测](./gateway-worker-development/heartbeat.html))，心跳间隔20-30秒最佳，为了避免长连接应为长时间不通讯被节点防火墙断开。
+3、长连接应用切记需要开启应用层心跳(GatewayWorker提供了设置，[参见心跳检测](/gatewaydoc/gateway-worker-development/heartbeat.html))，心跳间隔20-30秒最佳，为了避免长连接应为长时间不通讯被节点防火墙断开。
 
 
 

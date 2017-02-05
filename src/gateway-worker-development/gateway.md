@@ -68,7 +68,7 @@ $gateway = new Gateway("websocket://0.0.0.0:8585");
 
 4、lanIp
 
-lanIp是Gateway所在服务器的内网IP，只有在分布式部署时才需要设置
+lanIp是Gateway所在服务器的内网IP，默认填写127.0.0.1即可。[多服务器分布式部署](gateway-worker-separation.html)的时候需要填写真实的内网ip，不能填写127.0.0.1。
 
 5、startPort
 

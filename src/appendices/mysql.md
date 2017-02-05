@@ -195,7 +195,7 @@ $db1->select('ID,Sex')->from('Persons')->where('sex= :sex')->bindValues(array('s
 //等价于
 $db1->select('ID,Sex')->from('Persons')->where("sex= 'F' ")->query();
 //等价于
-$db1->query("SELECT ID,Sex FROM `Persons` WHERE sex=‘M’");
+$db1->query("SELECT ID,Sex FROM `Persons` WHERE sex='M'");
 
 
 // 获取一行数据
@@ -203,7 +203,7 @@ $db1->select('ID,Sex')->from('Persons')->where('sex= :sex')->bindValues(array('s
 //等价于
 $db1->select('ID,Sex')->from('Persons')->where("sex= 'F' ")->row();
 //等价于
-$db1->row("SELECT ID,Sex FROM `Persons` WHERE sex=‘M’");
+$db1->row("SELECT ID,Sex FROM `Persons` WHERE sex='M'");
 
 
 // 获取一列数据
@@ -211,7 +211,7 @@ $db1->select('ID')->from('Persons')->where('sex= :sex')->bindValues(array('sex'=
 //等价于
 $db1->select('ID')->from('Persons')->where("sex= 'F' ")->column();
 //等价于
-$db1->column("SELECT `ID` FROM `Persons` WHERE sex=‘M’");
+$db1->column("SELECT `ID` FROM `Persons` WHERE sex='M'");
 
 // 获取单个值
 $db1->select('ID,Sex')->from('Persons')->where('sex= :sex')->bindValues(array('sex'=>'M'))->single();
@@ -221,7 +221,7 @@ $db1->select('ID,Sex')->from('Persons')->where("sex= 'F' ")->single();
 $db1->single("SELECT ID,Sex FROM `Persons` WHERE sex='M'");
 
 // 复杂查询
-$db1->select('*')->from('table1')->innerJoin('table2','table1.uid = table2.uid')->where('age > :age')->groupBy(array('aid'))->having('foo="foo"')->orderBy(array('did'))->limit(10)->offset(20)->bindValues(arra
+$db1->select('*')->from('table1')->innerJoin('table2','table1.uid = table2.uid')->where('age > :age')->groupBy(array('aid'))->having('foo="foo"')->orderByASC/*orderByDESC*/(array('did'))->limit(10)->offset(20)->bindValues(arra
 y('age' => 13));
 // 等价于
 $db1->query(SELECT * FROM `table1` INNER JOIN `table2` ON `table1`.`uid` = `table2`.`uid` WHERE age > 13 GROUP BY aid HAVING foo="foo" ORDER BY did LIMIT 10 OFFSET 20“);
