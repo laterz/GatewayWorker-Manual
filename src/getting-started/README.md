@@ -5,15 +5,17 @@
 业务开发只需要关注 Applications/项目/Events.php一个文件即可。<br>
 业务开发只需要关注 Applications/项目/Events.php一个文件即可。<br>
 
-开放的端口及协议在start_gateway.php中更改。参见[Gateway类的使用](./gateway-worker-development/gateway.html)一章。
+开放的端口及协议在start_gateway.php中更改。参见[Gateway类的使用](/gatewaydoc/gateway-worker-development/gateway.html)一章。
 
 
 ## ```注意```
 1、服务端启动成功，但是无法通讯，请检查服务器防火墙。
 
-2、客户端与服务端要能保持正常通讯，需要保证客户端与服务端的通讯协议是一致的。比如服务端是websocket协议，客户端也要使用websocket协议才能通讯，否则无法通讯。
+2、客户端只能连接Gateway端口，不要连接Register端口。
 
-3、长连接应用切记需要开启应用层心跳(GatewayWorker提供了设置，[参见心跳检测](/gatewaydoc/gateway-worker-development/heartbeat.html))，心跳间隔20-30秒最佳，为了避免长连接应为长时间不通讯被节点防火墙断开。
+3、客户端与服务端要能保持正常通讯，需要保证客户端与服务端的通讯协议是一致的。比如服务端是websocket协议，客户端也要使用websocket协议才能通讯，否则无法通讯。
+
+4、长连接应用切记需要开启应用层心跳(GatewayWorker提供了设置，[参见心跳检测](/gatewaydoc/gateway-worker-development/heartbeat.html))，心跳间隔20-30秒最佳，为了避免长连接应为长时间不通讯被节点防火墙断开。
 
 
 

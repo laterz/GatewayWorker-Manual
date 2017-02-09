@@ -5,12 +5,17 @@
 ```php
 callback BusinessWorker::$processTimeoutHandler
 ```
-**(注意：此特性需要GatewayWorker版本>=2.0.2，如何查看版本号参考《常见问题》一章)**
-
-(此属性一般不用设置)
+``` (需要GatewayWorker版本>=2.0.2) ```
 
 
 设置超时处理函数，即当发生超时事件时执行的回调函数，默认值为```Workerman\\Worker::log```，即记录日志到```GatewayWorker/workerman.log```（可以设置```Worker::$logFile```更改日志文件）
+
+
+**注意：**
+
+1、需要GatewayWorker版本>=2.0.2，如何查看版本号参考《常见问题》一章
+
+2、不支持windows系统
 
 
 ## 回调函数参数

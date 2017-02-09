@@ -5,16 +5,22 @@
 ```php
 int BusinessWorker::$processTimeout
 ```
-**(注意：此特性需要GatewayWorker版本>=2.0.2，如何查看版本号参考《常见问题》一章)**
-
-(此属性一般不用设置)
+``` (需要GatewayWorker版本>=2.0.2) ```
 
 
 设置监控服务端业务超时时间（单位秒）。不设置默认是30秒，设置为0表示不监控。
 
 此属性用于监控```Events::onConnect Events::onMessage Events::onClose```的执行时间，单次执行时间如果超过```BusinessWorker::$processTimeout```设定的值，则记录一条日志到workerman.log，日志中包含超时的调用栈，这对于排查业务长时间阻塞以及死循环等问题非常有帮助。
 
-注意：此属性需要在Events.php文件头部设置一条语句```declare(ticks=1);```才能生效，见下面示例。
+**注意：**
+
+1、需要GatewayWorker版本>=2.0.2，如何查看版本号参考《常见问题》一章
+
+2、不支持windows系统
+
+3、此属性需要在Events.php文件头部设置一条语句```declare(ticks=1);```才能生效，见下面示例。
+
+
 
 ## 范例
 start_businessworker.php
