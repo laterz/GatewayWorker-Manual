@@ -11,7 +11,7 @@
 
 **start_gateway.php中设置以下代码。**
 
-```
+```php
 $context = array(
     'ssl' => array(
         'local_cert' => '/etc/nginx/conf.d/ssl/server.pem', // 或者crt文件
@@ -21,7 +21,7 @@ $context = array(
 // websocket协议
 $gateway = new Gateway("websocket://0.0.0.0:7272", $context);
 // 开启SSL，websocket+SSL 即wss
-$gateway->transport = ssl;
+$gateway->transport = 'ssl';
 ```
 
 ``` 注意：证书一般是与域名绑定的，测试的时候请使用域名连接测试。 ```
