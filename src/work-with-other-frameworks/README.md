@@ -52,7 +52,7 @@ class Events.php
         )));
     }
 
-    // GatewayWorker不做任何业务逻辑，onMessage留空即可
+    // GatewayWorker建议不做任何业务逻辑，onMessage留空即可
     public static function onMessage($client_id, $message)
     {
 
@@ -62,7 +62,12 @@ class Events.php
 
 **网站页面js片段**
 ```javascript
-// 与GatewayWorker建立websocket连接，域名和端口改为你实际的域名端口
+/**
+ * 与GatewayWorker建立websocket连接，域名和端口改为你实际的域名端口，
+ * 其中端口为Gateway端口，即start_gateway.php指定的端口。
+ * start_gateway.php 中需要指定websocket协议，像这样
+ * $gateway = new Gateway(websocket://0.0.0.0:7272);
+ */
 ws = new WebSocket("ws://your_domain.com:7272");
 // 服务端主动推送消息时会触发这里的onmessage
 ws.onmessage = function(e){
