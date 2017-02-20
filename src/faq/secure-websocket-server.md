@@ -14,8 +14,9 @@
 ```php
 $context = array(
     'ssl' => array(
-        'local_cert' => '/etc/nginx/conf.d/ssl/server.pem', // 或者crt文件
-        'local_pk'   => '/etc/nginx/conf.d/ssl/server.key',
+        'local_cert'  => '/etc/nginx/conf.d/ssl/server.pem', // 或者crt文件
+        'local_pk'    => '/etc/nginx/conf.d/ssl/server.key',
+        'verify_peer' => false
     )
 );
 // websocket协议
